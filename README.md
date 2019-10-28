@@ -1,0 +1,2 @@
+# SharedPreferenceFavorites
+ My Favorites app
