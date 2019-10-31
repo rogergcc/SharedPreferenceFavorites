@@ -4,18 +4,16 @@
   ~ Copyright Ⓒ 2019 . All rights reserved.
   -->
 
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.recyclerview.widget.RecyclerView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-
-
-    android:id="@+id/principal_container"
-
+    android:id="@+id/list"
+    android:name="com.rogergcc.sharedpreferencefavorites.fragments.RickAndMortyFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".NavigationActivity"
-    tools:showIn="@layout/app_bar_navigation">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    android:background="@color/color_details"
+
+    tools:context=".fragments.RickAndMortyFragment"
+    tools:listitem="@layout/fragment_rickandmorty" />

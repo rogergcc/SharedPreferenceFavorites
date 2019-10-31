@@ -18,9 +18,9 @@
             android:icon="@drawable/ic_menu_gallery"
             android:title="@string/menu_gallery" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="markers favorites" />
+            android:id="@+id/nav_favorites"
+            android:icon="@drawable/ic_bookmark_border_black_24dp"
+            android:title="favorites" />
         <item
             android:visible="false"
             android:id="@+id/nav_tools"
@@ -29,7 +29,8 @@
     </group>
 
     <item android:title="Communicate"
-        android:icon="@drawable/ic_bookmark_border_black_24dp">
+        
+        >
         <menu>
             <item
                 android:id="@+id/nav_share"

@@ -5,6 +5,7 @@
 
 package com.rogergcc.sharedpreferencefavorites;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -12,22 +13,28 @@ import com.google.android.material.snackbar.Snackbar;
 
 import android.view.View;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.core.view.GravityCompat;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 
 import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
+import com.rogergcc.sharedpreferencefavorites.fragments.FavoriteFragment;
+import com.rogergcc.sharedpreferencefavorites.fragments.RickAndMortyFragment;
+import com.rogergcc.sharedpreferencefavorites.fragments.dummy.DummyContent;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.view.Menu;
 
 public class NavigationActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener , FavoriteFragment.OnListFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,14 +42,8 @@ public class NavigationActivity extends AppCompatActivity
         setContentView(R.layout.activity_navigation);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -84,28 +85,73 @@ public class NavigationActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+
+
+//    private void initToolbar() {
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
+//        final ActionBar ab = getSupportActionBar();
+//        if (ab != null) {
+//            // Poner ícono del drawer toggle
+//            ab.setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp);
+//            ab.setDisplayHomeAsUpEnabled(true);
+//        }
+//
+//    }
+
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+        Fragment genericFragment = null;
+        FragmentManager fragmentManager = getSupportFragmentManager();
+
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_home) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
 
-        } else if (id == R.id.nav_slideshow) {
+        switch (item.getItemId()) {
+            case R.id.nav_home:
+                genericFragment = new RickAndMortyFragment();
+                break;
+            case R.id.nav_gallery:
 
-        } else if (id == R.id.nav_tools) {
+                break;
+            case R.id.nav_favorites:
 
-        } else if (id == R.id.nav_share) {
+                genericFragment = new FavoriteFragment();
 
-        } else if (id == R.id.nav_send) {
+                break;
+            case R.id.nav_tools:
+//                fragmentoGenerico = new FragmentoServicios();
 
+
+                break;
+            case R.id.nav_share:
+                //startActivity(new Intent(this, ActividadConfiguracion.class));
+                break;
+            case R.id.nav_send:
+                //startActivity(new Intent(this, ActividadConfiguracion.class));
+                break;
         }
+
+
+        if (genericFragment != null) {
+            fragmentManager
+                    .beginTransaction()
+                    .replace(R.id.principal_container, genericFragment)
+                    .commit();
+        }
+
+
+        setTitle(item.getTitle());
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onListFragmentInteraction(DummyContent.DummyItem item) {
+
     }
 }

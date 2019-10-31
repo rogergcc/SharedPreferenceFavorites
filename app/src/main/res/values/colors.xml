@@ -8,4 +8,10 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+    <color name="colorblacktransparent">#90000000</color>
+    <color name="color_details">#333333</color>
+    <color name="detail_tex">#9E9E9E</color>
+    <color name="detail_text_value">#FF9800</color>
+    <color name="color_select_favorite">#EF6C00</color>
 </resources>
