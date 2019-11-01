@@ -71,7 +71,7 @@ public class RickAndMortyRecyclerViewAdapter extends RecyclerView.Adapter<RickAn
                 .apply(requestOptions)
                 .into(holder.mimage_character);
 
-        holder.mselect_favorit.setOnClickListener(new View.OnClickListener() {
+        holder.mselect_favorite.setOnClickListener(new View.OnClickListener() {
             int button01pos = 0;
 
             @Override
@@ -80,15 +80,15 @@ public class RickAndMortyRecyclerViewAdapter extends RecyclerView.Adapter<RickAn
                 Gson gson = builder.create();
 
                 //sharedPreference = new MySharedPreference(context);
-                if (holder.mselect_favorit.getColorFilter() != null) {
-                    holder.mselect_favorit.clearColorFilter();
+                if (holder.mselect_favorite.getColorFilter() != null) {
+                    holder.mselect_favorite.clearColorFilter();
                     //mFavList.remove(mProductObject.get(position));
 
                     //String addNuevoItem = gson.toJson(mFavList);
 
                     //sharedPreference.addProductToTheCart(addNuevoItem);
                 } else {
-                    holder.mselect_favorit.setColorFilter(ContextCompat.getColor(holder.itemView.getContext(),
+                    holder.mselect_favorite.setColorFilter(ContextCompat.getColor(holder.itemView.getContext(),
                             R.color.color_select_favorite));
                     //mFavList.add(mProductObject.get(position));
 
@@ -117,14 +117,14 @@ public class RickAndMortyRecyclerViewAdapter extends RecyclerView.Adapter<RickAn
         private final TextView mdetails_origin;
         private final TextView mdetails_last_location;
         private final ImageView mimage_character;
-        private final ImageView mselect_favorit;
+        private final ImageView mselect_favorite;
         public RickMorty mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
             mimage_character =  view.findViewById(R.id.image_character);
-            mselect_favorit =  view.findViewById(R.id.select_favorit);
+            mselect_favorite =  view.findViewById(R.id.select_favorite);
 
             mname_character =  view.findViewById(R.id.name_character);
             mdetails_status =  view.findViewById(R.id.details_status);
