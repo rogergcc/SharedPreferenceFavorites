@@ -40,16 +40,16 @@
                 android:src="@drawable/character_image" />
 
             <!--<ImageView-->
-                <!--android:id="@+id/select_favorito"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_gravity="right|top"-->
-                <!--android:layout_margin="2dp"-->
-                <!--android:clickable="true"-->
-                <!--android:focusable="true"-->
-                <!--android:padding="4dp"-->
-                <!--android:src="@drawable/ic_favorite_black_24dp"-->
-                <!--tools:ignore="NewApi" />-->
+            <!--android:id="@+id/select_favorito"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="right|top"-->
+            <!--android:layout_margin="2dp"-->
+            <!--android:clickable="true"-->
+            <!--android:focusable="true"-->
+            <!--android:padding="4dp"-->
+            <!--android:src="@drawable/ic_favorite_black_24dp"-->
+            <!--tools:ignore="NewApi" />-->
 
             <TextView
 
@@ -99,20 +99,20 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:textSize="12sp"
                     android:layout_width="match_parent"
-
                     android:layout_height="wrap_content"
+
                     android:text="STATUS"
-                    android:textColor="@color/detail_tex" />
+                    android:textColor="@color/detail_tex"
+                    android:textSize="12sp" />
 
                 <TextView
-                    android:textSize="12sp"
                     android:id="@+id/details_status"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Alive"
-                    android:textColor="@color/detail_text_value" />
+                    android:textColor="@color/detail_text_value"
+                    android:textSize="12sp" />
 
                 <!--<View-->
                 <!--android:layout_marginTop="10dp"-->
@@ -122,71 +122,71 @@
                 <!--android:background="#c0c0c0"/>-->
 
                 <TextView
-                    android:textSize="12sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
                     android:text="SPECIES"
-                    android:textColor="@color/detail_tex" />
+                    android:textColor="@color/detail_tex"
+                    android:textSize="12sp" />
 
                 <TextView
-                    android:textSize="12sp"
                     android:id="@+id/details_species"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Human"
-                    android:textColor="@color/detail_text_value" />
+                    android:textColor="@color/detail_text_value"
+                    android:textSize="12sp" />
 
 
                 <TextView
-                    android:textSize="12sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
                     android:text="GENDER"
-                    android:textColor="@color/detail_tex" />
+                    android:textColor="@color/detail_tex"
+                    android:textSize="12sp" />
 
                 <TextView
-                    android:textSize="12sp"
                     android:id="@+id/details_gender"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Female"
-                    android:textColor="@color/detail_text_value" />
+                    android:textColor="@color/detail_text_value"
+                    android:textSize="12sp" />
 
 
                 <TextView
-                    android:textSize="12sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
                     android:text="ORIGIN"
-                    android:textColor="@color/detail_tex" />
+                    android:textColor="@color/detail_tex"
+                    android:textSize="12sp" />
 
                 <TextView
-                    android:textSize="12sp"
                     android:id="@+id/details_origin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Earth (C-137)"
-                    android:textColor="@color/detail_text_value" />
+                    android:textColor="@color/detail_text_value"
+                    android:textSize="12sp" />
 
 
                 <TextView
-                    android:textSize="12sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
                     android:text="LAST LOCATION"
-                    android:textColor="@color/detail_tex" />
+                    android:textColor="@color/detail_tex"
+                    android:textSize="12sp" />
 
                 <TextView
-                    android:textSize="12sp"
                     android:id="@+id/details_last_location"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Earth (C-137)"
-                    android:textColor="@color/detail_text_value" />
+                    android:textColor="@color/detail_text_value"
+                    android:textSize="12sp" />
             </LinearLayout>
 
 

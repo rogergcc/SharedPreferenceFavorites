@@ -130,4 +130,19 @@ public class RickMorty {
     public void setId(int id) {
         this.id = id;
     }
+
+
+    @Override()
+    public boolean equals(Object other) {
+        // This is unavoidable, since equals() must accept an Object and not something more derived
+        if (other instanceof RickMorty) {
+            // Note that I use equals() here too, otherwise, again, we will check for referential equality.
+            // Using equals() here allows the Model class to implement it's own version of equality, rather than
+            // us always checking for referential equality.
+            RickMorty otherProduct = (RickMorty) other;
+            return otherProduct.getId()==(this.getId());
+        }
+
+        return false;
+    }
 }

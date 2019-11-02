@@ -5,33 +5,22 @@
 
 package com.rogergcc.sharedpreferencefavorites;
 
-import android.content.Intent;
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
-import android.view.View;
-
-import androidx.appcompat.app.ActionBar;
-import androidx.core.view.GravityCompat;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-
+import android.view.Menu;
 import android.view.MenuItem;
+
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.navigation.NavigationView;
 import com.rogergcc.sharedpreferencefavorites.fragments.FavoriteFragment;
 import com.rogergcc.sharedpreferencefavorites.fragments.RickAndMortyFragment;
-import com.rogergcc.sharedpreferencefavorites.fragments.dummy.DummyContent;
-
-import androidx.drawerlayout.widget.DrawerLayout;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-
-import android.view.Menu;
+import com.rogergcc.sharedpreferencefavorites.model.RickMorty;
 
 public class NavigationActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener , FavoriteFragment.OnListFragmentInteractionListener {
@@ -150,8 +139,10 @@ public class NavigationActivity extends AppCompatActivity
         return true;
     }
 
+
+
     @Override
-    public void onListFragmentInteraction(DummyContent.DummyItem item) {
+    public void onListFragmentInteraction(RickMorty item) {
 
     }
 }

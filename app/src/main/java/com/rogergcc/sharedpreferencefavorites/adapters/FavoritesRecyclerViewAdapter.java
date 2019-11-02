@@ -3,45 +3,41 @@
  * Copyright Ⓒ 2019 . All rights reserved.
  */
 
-package com.rogergcc.sharedpreferencefavorites.fragments;
+package com.rogergcc.sharedpreferencefavorites.adapters;
 
-import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.rogergcc.sharedpreferencefavorites.R;
-
-
+import com.rogergcc.sharedpreferencefavorites.fragments.FavoriteFragment.OnListFragmentInteractionListener;
 import com.rogergcc.sharedpreferencefavorites.model.RickMorty;
 
 import java.util.List;
 
-public class RickAndMortyRecyclerViewAdapter extends RecyclerView.Adapter<RickAndMortyRecyclerViewAdapter.ViewHolder> {
+
+public class FavoritesRecyclerViewAdapter extends RecyclerView.Adapter<FavoritesRecyclerViewAdapter.ViewHolder> {
 
     private final List<RickMorty> mValues;
+    private final OnListFragmentInteractionListener mListener;
 
-
-    public RickAndMortyRecyclerViewAdapter(List<RickMorty> items) {
+    public FavoritesRecyclerViewAdapter(List<RickMorty> items, OnListFragmentInteractionListener listener) {
         mValues = items;
-
+        mListener = listener;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_rickandmorty, parent, false);
+                .inflate(R.layout.fragment_favorite, parent, false);
         return new ViewHolder(view);
     }
 
@@ -55,6 +51,7 @@ public class RickAndMortyRecyclerViewAdapter extends RecyclerView.Adapter<RickAn
         holder.mdetails_gender.setText(mValues.get(position).getGender());
         holder.mdetails_origin.setText(mValues.get(position).getOrigin().getName());
         holder.mdetails_last_location.setText(mValues.get(position).getLocation().getName());
+
 
         RequestOptions requestOptions = new RequestOptions()
                 .fitCenter()
@@ -71,33 +68,15 @@ public class RickAndMortyRecyclerViewAdapter extends RecyclerView.Adapter<RickAn
                 .apply(requestOptions)
                 .into(holder.mimage_character);
 
-        holder.mselect_favorite.setOnClickListener(new View.OnClickListener() {
-            int button01pos = 0;
 
+        holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GsonBuilder builder = new GsonBuilder();
-                Gson gson = builder.create();
-
-                //sharedPreference = new MySharedPreference(context);
-                if (holder.mselect_favorite.getColorFilter() != null) {
-                    holder.mselect_favorite.clearColorFilter();
-                    //mFavList.remove(mProductObject.get(position));
-
-                    //String addNuevoItem = gson.toJson(mFavList);
-
-                    //sharedPreference.addProductToTheCart(addNuevoItem);
-                } else {
-                    holder.mselect_favorite.setColorFilter(ContextCompat.getColor(holder.itemView.getContext(),
-                            R.color.color_select_favorite));
-                    //mFavList.add(mProductObject.get(position));
-
-                    //String addNuevoItem = gson.toJson(mFavList);
-                    //sharedPreference.addProductToTheCart(addNuevoItem);
-
+                if (null != mListener) {
+                    // Notify the active callbacks interface (the activity, if the
+                    // fragment is attached to one) that an item has been selected.
+                    mListener.onListFragmentInteraction(holder.mItem);
                 }
-
-
             }
         });
     }
@@ -123,15 +102,15 @@ public class RickAndMortyRecyclerViewAdapter extends RecyclerView.Adapter<RickAn
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mimage_character =  view.findViewById(R.id.image_character);
-            mselect_favorite =  view.findViewById(R.id.select_favorite);
+            mimage_character = view.findViewById(R.id.image_character);
+            mselect_favorite = view.findViewById(R.id.select_favorite);
 
-            mname_character =  view.findViewById(R.id.name_character);
-            mdetails_status =  view.findViewById(R.id.details_status);
-            mdetails_species =  view.findViewById(R.id.details_species);
-            mdetails_gender=  view.findViewById(R.id.details_gender);
-            mdetails_origin=  view.findViewById(R.id.details_origin);
-            mdetails_last_location=  view.findViewById(R.id.details_last_location);
+            mname_character = view.findViewById(R.id.name_character);
+            mdetails_status = view.findViewById(R.id.details_status);
+            mdetails_species = view.findViewById(R.id.details_species);
+            mdetails_gender = view.findViewById(R.id.details_gender);
+            mdetails_origin = view.findViewById(R.id.details_origin);
+            mdetails_last_location = view.findViewById(R.id.details_last_location);
         }
 
         @Override
