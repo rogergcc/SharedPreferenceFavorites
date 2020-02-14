@@ -1,5 +1,5 @@
 # SharedPreferenceFavorites
- My Favorites app
+ Save you collections offline in android — sharepreferences
 
  ## 📸 Screenshots
 
