@@ -24,12 +24,12 @@ import com.rogergcc.sharedpreferencefavorites.model.RickMorty;
 import java.util.List;
 
 
-public class FavoritesRecyclerViewAdapter extends RecyclerView.Adapter<FavoritesRecyclerViewAdapter.ViewHolder> {
+public class FavoritesCharactersAdapter extends RecyclerView.Adapter<FavoritesCharactersAdapter.ViewHolder> {
 
     private final List<RickMorty> mValues;
     private final OnListFragmentInteractionListener mListener;
 
-    public FavoritesRecyclerViewAdapter(List<RickMorty> items, OnListFragmentInteractionListener listener) {
+    public FavoritesCharactersAdapter(List<RickMorty> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }
@@ -37,7 +37,7 @@ public class FavoritesRecyclerViewAdapter extends RecyclerView.Adapter<Favorites
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_favorite, parent, false);
+                .inflate(R.layout.item_favorite_character, parent, false);
         return new ViewHolder(view);
     }
 

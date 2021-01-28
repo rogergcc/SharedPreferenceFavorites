@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.rogergcc.sharedpreferencefavorites.R;
-import com.rogergcc.sharedpreferencefavorites.adapters.FavoritesRecyclerViewAdapter;
+import com.rogergcc.sharedpreferencefavorites.adapters.FavoritesCharactersAdapter;
 import com.rogergcc.sharedpreferencefavorites.helpers.MySharedPreference;
 import com.rogergcc.sharedpreferencefavorites.model.RickMorty;
 
@@ -35,7 +35,7 @@ public class FavoriteFragment extends Fragment {
     private OnListFragmentInteractionListener mListener;
     private RecyclerView recyclerView;
     private LinearLayoutManager layoutManager;
-    private FavoritesRecyclerViewAdapter favoritesAdapter;
+    private FavoritesCharactersAdapter favoritesAdapter;
     private MySharedPreference mShared;
     private List<RickMorty> favoritesList;
 
@@ -73,7 +73,7 @@ public class FavoriteFragment extends Fragment {
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
 
-        //favoritesAdapter = new FavoritesRecyclerViewAdapter();
+        //favoritesAdapter = new FavoritesCharactersAdapter();
 
         mShared = new MySharedPreference(context);
 
@@ -83,7 +83,7 @@ public class FavoriteFragment extends Fragment {
 
         if (productsFavorites.length() != 0) {
             favoritesList = new Gson().fromJson(productsFavorites, type);
-            FavoritesRecyclerViewAdapter favoritesAdapter = new FavoritesRecyclerViewAdapter(favoritesList, mListener);
+            FavoritesCharactersAdapter favoritesAdapter = new FavoritesCharactersAdapter(favoritesList, mListener);
             recyclerView.setAdapter(favoritesAdapter);
         }
 

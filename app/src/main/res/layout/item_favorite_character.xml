@@ -2,20 +2,23 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/lugar_destacado"
+    android:id="@+id/itemCardViewCharacter"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
 
+    android:layout_marginStart="10dp"
     android:layout_marginTop="4dp"
-
-
+    android:layout_marginEnd="10dp"
     android:layout_marginBottom="4dp"
 
     android:clickable="true"
     android:focusable="true"
     android:foreground="?android:attr/selectableItemBackground"
     card_view:cardCornerRadius="2dp"
-    card_view:cardElevation="5dp">
+    card_view:cardElevation="0dp"
+
+
+    >
 
     <LinearLayout
 
@@ -90,6 +93,7 @@
                 android:focusable="true"
                 android:padding="4dp"
                 android:src="@drawable/ic_star_black_24dp"
+                android:visibility="gone"
                 tools:ignore="NewApi" />
 
             <LinearLayout

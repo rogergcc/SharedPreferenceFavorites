@@ -8,7 +8,6 @@ package com.rogergcc.sharedpreferencefavorites.fragments;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,7 +16,6 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -31,7 +29,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.rogergcc.sharedpreferencefavorites.R;
-import com.rogergcc.sharedpreferencefavorites.adapters.RickAndMortyRecyclerViewAdapter;
+import com.rogergcc.sharedpreferencefavorites.adapters.ListCharactersAdapter;
 import com.rogergcc.sharedpreferencefavorites.helpers.MySharedPreference;
 import com.rogergcc.sharedpreferencefavorites.helpers.VolleySingleton;
 import com.rogergcc.sharedpreferencefavorites.model.RickMorty;
@@ -57,7 +55,7 @@ public class RickAndMortyFragment extends Fragment {
 
     private List<RickMorty> rickMortyCharactersList;
     private ProgressDialog pd;
-    private RickAndMortyRecyclerViewAdapter adapterapi;
+    private ListCharactersAdapter adapterapi;
     private ArrayList<RickMorty> mFavoritesList;
 
     /**
@@ -107,7 +105,7 @@ public class RickAndMortyFragment extends Fragment {
         pd = new ProgressDialog(getContext());
 
         pd.setTitle("Obtain Characters");
-        pd.setMessage("Api Data");
+        pd.setMessage("loading...");
         pd.setCancelable(false);
         pd.show();
 
@@ -148,11 +146,11 @@ public class RickAndMortyFragment extends Fragment {
 
                             recyclerView.setHasFixedSize(true);
                             recyclerView.setLayoutManager(linearLayoutManager);
-                            DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
-                                    linearLayoutManager.getOrientation());
-                            recyclerView.addItemDecoration(dividerItemDecoration);
+//                            DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
+//                                    linearLayoutManager.getOrientation());
+//                            recyclerView.addItemDecoration(dividerItemDecoration);
 
-                            adapterapi = new RickAndMortyRecyclerViewAdapter(mFavoritesList, rickMortyCharactersList);
+                            adapterapi = new ListCharactersAdapter(mFavoritesList, rickMortyCharactersList);
                             recyclerView.setAdapter(adapterapi);
                             adapterapi.notifyDataSetChanged();
 

@@ -5,8 +5,11 @@
   -->
 
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
+<!--    <color name="colorPrimary">#008577</color>-->
+    <color name="colorPrimary">#FFA000</color>
+<!--    <color name="colorPrimaryDark">#00574B</color>-->
+    <color name="colorPrimaryDark">#120A00</color>
+
     <color name="colorAccent">#D81B60</color>
 
     <color name="colorblacktransparent">#90000000</color>

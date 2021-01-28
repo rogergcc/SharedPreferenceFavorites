@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by rogergcc
+  ~ Copyright Ⓒ 2021 . All rights reserved.
+  -->
+
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/favoriteFragment">
+
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.rogergcc.sharedpreferencefavorites.fragments.FavoriteFragment"
+        android:label="fragment_favorite_list"
+        tools:layout="@layout/fragment_favorite_list" />
+    <fragment
+        android:id="@+id/rickAndMortyFragment"
+        android:name="com.rogergcc.sharedpreferencefavorites.fragments.RickAndMortyFragment"
+        android:label="fragment_rickandmorty_list"
+        tools:layout="@layout/fragment_rickandmorty_list" />
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="com.rogergcc.sharedpreferencefavorites.MainActivity"
+        android:label="activity_main"
+        tools:layout="@layout/activity_main" />
+    <activity
+        android:id="@+id/navigationActivity"
+        android:name="com.rogergcc.sharedpreferencefavorites.NavigationActivity"
+        android:label="app_bar_navigation"
+        tools:layout="@layout/app_bar_navigation" />
+</navigation>

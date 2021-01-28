@@ -5,6 +5,7 @@
 
 package com.rogergcc.sharedpreferencefavorites.adapters;
 
+import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,7 +29,7 @@ import com.rogergcc.sharedpreferencefavorites.model.RickMorty;
 
 import java.util.List;
 
-public class RickAndMortyRecyclerViewAdapter extends RecyclerView.Adapter<RickAndMortyRecyclerViewAdapter.ViewHolder> {
+public class ListCharactersAdapter extends RecyclerView.Adapter<ListCharactersAdapter.ViewHolder> {
 
     private MySharedPreference sharedPreference;
 
@@ -37,7 +38,7 @@ public class RickAndMortyRecyclerViewAdapter extends RecyclerView.Adapter<RickAn
 
     private List<RickMorty> mFavoritesList;
 
-    public RickAndMortyRecyclerViewAdapter(List<RickMorty> mFavorites, List<RickMorty> items) {
+    public ListCharactersAdapter(List<RickMorty> mFavorites, List<RickMorty> items) {
         this.mFavoritesList = mFavorites;
         this.mValues = items;
 
@@ -46,7 +47,7 @@ public class RickAndMortyRecyclerViewAdapter extends RecyclerView.Adapter<RickAn
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_rickandmorty, parent, false);
+                .inflate(R.layout.items_character, parent, false);
         return new ViewHolder(view);
     }
 
@@ -87,7 +88,10 @@ public class RickAndMortyRecyclerViewAdapter extends RecyclerView.Adapter<RickAn
                 holder.mselect_favorite.setColorFilter(ContextCompat.getColor(holder.itemView.getContext(),
                         R.color.color_select_favorite));
 
+                holder.itemCardViewCharacter.setCardBackgroundColor( ContextCompat.getColor(holder.mView.getContext(), R.color.colorPrimaryDark));
+
             } else {
+                holder.itemCardViewCharacter.setCardBackgroundColor( ContextCompat.getColor(holder.mView.getContext(), R.color.color_details));
                 holder.mselect_favorite.clearColorFilter();
             }
         }
@@ -103,6 +107,7 @@ public class RickAndMortyRecyclerViewAdapter extends RecyclerView.Adapter<RickAn
 
                 sharedPreference = new MySharedPreference(holder.itemView.getContext());
                 if (holder.mselect_favorite.getColorFilter() != null) {
+                    holder.itemCardViewCharacter.setCardBackgroundColor( ContextCompat.getColor(holder.mView.getContext(), R.color.color_details));
                     holder.mselect_favorite.clearColorFilter();
                     mFavoritesList.remove(mValues.get(pos));
 
@@ -110,6 +115,7 @@ public class RickAndMortyRecyclerViewAdapter extends RecyclerView.Adapter<RickAn
 
                     sharedPreference.saveFavoritesMarkers(addNewItem);
                 } else {
+                    holder.itemCardViewCharacter.setCardBackgroundColor( ContextCompat.getColor(holder.mView.getContext(), R.color.colorPrimaryDark));
                     holder.mselect_favorite.setColorFilter(ContextCompat.getColor(holder.itemView.getContext(),
                             R.color.color_select_favorite));
                     mFavoritesList.add(mValues.get(pos));
@@ -152,8 +158,9 @@ public class RickAndMortyRecyclerViewAdapter extends RecyclerView.Adapter<RickAn
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
+        public final CardView itemCardViewCharacter;
         public final TextView mname_character;
 
         private final TextView mdetails_status;
@@ -168,6 +175,7 @@ public class RickAndMortyRecyclerViewAdapter extends RecyclerView.Adapter<RickAn
         public ViewHolder(View view) {
             super(view);
             mView = view;
+            itemCardViewCharacter = view.findViewById(R.id.itemCardViewCharacter);
             mimage_character = view.findViewById(R.id.image_character);
             mselect_favorite = view.findViewById(R.id.select_favorite);
 

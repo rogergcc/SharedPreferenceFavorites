@@ -8,7 +8,10 @@ package com.rogergcc.sharedpreferencefavorites;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -23,23 +26,108 @@ import com.rogergcc.sharedpreferencefavorites.fragments.RickAndMortyFragment;
 import com.rogergcc.sharedpreferencefavorites.model.RickMorty;
 
 public class NavigationActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener , FavoriteFragment.OnListFragmentInteractionListener {
+        implements
+//        NavigationView.OnNavigationItemSelectedListener,
+         FavoriteFragment.OnListFragmentInteractionListener
+{
+
+    private DrawerLayout drawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        //agregarToolbar();
 
-
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-        navigationView.setNavigationItemSelectedListener(this);
+
+//        navigationView.setNavigationItemSelectedListener(this);
+
+
+        if (navigationView != null) {
+            prepararDrawer(navigationView);
+            // Seleccionar item por defecto
+            seleccionarItem(navigationView.getMenu().getItem(0));
+        }
+
+        drawer.setVerticalFadingEdgeEnabled(true);
+
+    }
+
+    private void prepararDrawer(NavigationView navigationView) {
+        navigationView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                        menuItem.setChecked(true);
+                        seleccionarItem(menuItem);
+                        drawer.closeDrawers();
+                        return true;
+                    }
+                });
+
+    }
+
+    private void seleccionarItem(MenuItem itemDrawer) {
+        Fragment fragmentoGenerico = null;
+        FragmentManager fragmentManager = getSupportFragmentManager();
+
+        switch (itemDrawer.getItemId()) {
+            case R.id.nav_home:
+                fragmentoGenerico = new RickAndMortyFragment();
+                break;
+            case R.id.nav_gallery:
+
+                break;
+            case R.id.nav_favorites:
+
+                fragmentoGenerico = new FavoriteFragment();
+
+                break;
+            case R.id.nav_tools:
+//                fragmentoGenerico = new FragmentoServicios();
+
+
+                break;
+            case R.id.nav_share:
+                //startActivity(new Intent(this, ActividadConfiguracion.class));
+                break;
+            case R.id.nav_send:
+                //startActivity(new Intent(this, ActividadConfiguracion.class));
+                break;
+        }
+
+
+        if (fragmentoGenerico != null) {
+            fragmentManager
+                    .beginTransaction()
+                    .replace(R.id.principal_container, fragmentoGenerico)
+                    .commit();
+        }
+
+        // Setear título actual
+        setTitle(itemDrawer.getTitle());
+    }
+
+    private void agregarToolbar() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        final ActionBar ab = getSupportActionBar();
+        if (ab != null) {
+            // Poner ícono del drawer toggle
+//            ab.setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp);
+//            ab.setDisplayHomeAsUpEnabled(true);
+        }
+
     }
 
     @Override
@@ -88,56 +176,56 @@ public class NavigationActivity extends AppCompatActivity
 //
 //    }
 
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        Fragment genericFragment = null;
-        FragmentManager fragmentManager = getSupportFragmentManager();
-
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-
-        switch (item.getItemId()) {
-            case R.id.nav_home:
-                genericFragment = new RickAndMortyFragment();
-                break;
-            case R.id.nav_gallery:
-
-                break;
-            case R.id.nav_favorites:
-
-                genericFragment = new FavoriteFragment();
-
-                break;
-            case R.id.nav_tools:
-//                fragmentoGenerico = new FragmentoServicios();
-
-
-                break;
-            case R.id.nav_share:
-                //startActivity(new Intent(this, ActividadConfiguracion.class));
-                break;
-            case R.id.nav_send:
-                //startActivity(new Intent(this, ActividadConfiguracion.class));
-                break;
-        }
-
-
-        if (genericFragment != null) {
-            fragmentManager
-                    .beginTransaction()
-                    .replace(R.id.principal_container, genericFragment)
-                    .commit();
-        }
-
-
-        setTitle(item.getTitle());
-
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
+//    @SuppressWarnings("StatementWithEmptyBody")
+//    @Override
+//    public boolean onNavigationItemSelected(MenuItem item) {
+//        Fragment genericFragment = null;
+//        FragmentManager fragmentManager = getSupportFragmentManager();
+//
+//        // Handle navigation view item clicks here.
+//        int id = item.getItemId();
+//
+//
+//        switch (item.getItemId()) {
+//            case R.id.nav_home:
+//                genericFragment = new RickAndMortyFragment();
+//                break;
+//            case R.id.nav_gallery:
+//
+//                break;
+//            case R.id.nav_favorites:
+//
+//                genericFragment = new FavoriteFragment();
+//
+//                break;
+//            case R.id.nav_tools:
+////                fragmentoGenerico = new FragmentoServicios();
+//
+//
+//                break;
+//            case R.id.nav_share:
+//                //startActivity(new Intent(this, ActividadConfiguracion.class));
+//                break;
+//            case R.id.nav_send:
+//                //startActivity(new Intent(this, ActividadConfiguracion.class));
+//                break;
+//        }
+//
+//
+//        if (genericFragment != null) {
+//            fragmentManager
+//                    .beginTransaction()
+//                    .replace(R.id.principal_container, genericFragment)
+//                    .commit();
+//        }
+//
+//
+//        setTitle(item.getTitle());
+//
+//        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+//        drawer.closeDrawer(GravityCompat.START);
+//        return true;
+//    }
 
 
 

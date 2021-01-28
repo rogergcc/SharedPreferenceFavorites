@@ -1,12 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Created by rogergcc
   ~ Copyright Ⓒ 2019 . All rights reserved.
   -->
 
-<androidx.recyclerview.widget.RecyclerView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/list"
     android:name="com.rogergcc.sharedpreferencefavorites.fragments.RickAndMortyFragment"
@@ -16,4 +13,4 @@
     android:background="@color/color_details"
 
     tools:context=".fragments.RickAndMortyFragment"
-    tools:listitem="@layout/fragment_rickandmorty" />
+    tools:listitem="@layout/items_character" />

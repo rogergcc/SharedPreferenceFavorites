@@ -3,10 +3,9 @@
   ~ Created by rogergcc
   ~ Copyright Ⓒ 2019 . All rights reserved.
   -->
-
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:showIn="navigation_view">
+    >
 
     <group android:checkableBehavior="single">
         <item
@@ -19,7 +18,7 @@
             android:title="@string/menu_gallery" />
         <item
             android:id="@+id/nav_favorites"
-            android:icon="@drawable/ic_bookmark_border_black_24dp"
+            android:icon="@drawable/ic_baseline_stars_24"
             android:title="favorites" />
         <item
             android:visible="false"
@@ -29,7 +28,8 @@
     </group>
 
     <item android:title="Communicate"
-        
+        android:visible="false"
+
         >
         <menu>
             <item
