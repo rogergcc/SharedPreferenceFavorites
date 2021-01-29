@@ -8,10 +8,10 @@ https://medium.com/@rogercolquehuanca/storage-data-offline-in-android-shareprefe
 
 <div>
  
-<img src="screenshots/screenshot-1572635453673.jpg" height="480" width="auto" hspace="10">
+<img src="screenshots/screenshot-1572635453673.jpg" height="480" width="auto" hspace="2">
 
-<img src="screenshots/screenshot-1572666815800.jpg" height="480" width="auto" hspace="10">
+<img src="screenshots/screenshot-1572666815800.jpg" height="480" width="auto" hspace="2">
 
 
-<img src="screenshots/screenshot-1572666933983.jpg" height="480" width="auto" hspace="10">
+<img src="screenshots/screenshot-1572666933983.jpg" height="480" width="auto" hspace="2">
 </div>
