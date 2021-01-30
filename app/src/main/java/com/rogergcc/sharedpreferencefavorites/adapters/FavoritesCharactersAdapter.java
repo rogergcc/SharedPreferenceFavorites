@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -34,6 +35,7 @@ public class FavoritesCharactersAdapter extends RecyclerView.Adapter<FavoritesCh
         mListener = listener;
     }
 
+    @NonNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
@@ -86,7 +88,7 @@ public class FavoritesCharactersAdapter extends RecyclerView.Adapter<FavoritesCh
         return mValues.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
         public final TextView mname_character;
 
@@ -113,6 +115,7 @@ public class FavoritesCharactersAdapter extends RecyclerView.Adapter<FavoritesCh
             mdetails_last_location = view.findViewById(R.id.details_last_location);
         }
 
+        @NonNull
         @Override
         public String toString() {
             return super.toString() + " '" + mname_character.getText() + "'";

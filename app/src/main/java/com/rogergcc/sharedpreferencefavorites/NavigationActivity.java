@@ -8,7 +8,6 @@ package com.rogergcc.sharedpreferencefavorites;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -28,8 +27,7 @@ import com.rogergcc.sharedpreferencefavorites.model.RickMorty;
 public class NavigationActivity extends AppCompatActivity
         implements
 //        NavigationView.OnNavigationItemSelectedListener,
-         FavoriteFragment.OnListFragmentInteractionListener
-{
+        FavoriteFragment.OnListFragmentInteractionListener {
 
     private DrawerLayout drawer;
 
@@ -163,7 +161,6 @@ public class NavigationActivity extends AppCompatActivity
     }
 
 
-
 //    private void initToolbar() {
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
@@ -195,7 +192,7 @@ public class NavigationActivity extends AppCompatActivity
 //                break;
 //            case R.id.nav_favorites:
 //
-//                genericFragment = new FavoriteFragment();
+//                genericFragment = new FavoriteCharactersFragment();
 //
 //                break;
 //            case R.id.nav_tools:
@@ -226,7 +223,6 @@ public class NavigationActivity extends AppCompatActivity
 //        drawer.closeDrawer(GravityCompat.START);
 //        return true;
 //    }
-
 
 
     @Override

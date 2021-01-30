@@ -17,7 +17,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NoConnectionError;
@@ -28,9 +27,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.rogergcc.sharedpreferencefavorites.R;
 import com.rogergcc.sharedpreferencefavorites.adapters.ListCharactersAdapter;
+import com.rogergcc.sharedpreferencefavorites.databinding.FragmentRickandmortyListBinding;
 import com.rogergcc.sharedpreferencefavorites.helpers.MySharedPreference;
+import com.rogergcc.sharedpreferencefavorites.helpers.PaginationListener;
 import com.rogergcc.sharedpreferencefavorites.helpers.VolleySingleton;
 import com.rogergcc.sharedpreferencefavorites.model.RickMorty;
 import com.rogergcc.sharedpreferencefavorites.model.RickMortyResponse;
@@ -41,6 +41,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.rogergcc.sharedpreferencefavorites.helpers.PaginationListener.PAGE_START;
+
 
 public class RickAndMortyFragment extends Fragment {
 
@@ -49,7 +51,6 @@ public class RickAndMortyFragment extends Fragment {
     // TODO: Customize parameters
     private int mColumnCount = 1;
 
-    private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
 
 
@@ -57,6 +58,13 @@ public class RickAndMortyFragment extends Fragment {
     private ProgressDialog pd;
     private ListCharactersAdapter adapterapi;
     private ArrayList<RickMorty> mFavoritesList;
+
+    private int currentPage = PAGE_START;
+    private boolean isLastPage = false;
+    private int totalPage = 3;
+    private boolean isLoading = false;
+    private FragmentRickandmortyListBinding binding;
+    private Context mcontext;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -96,12 +104,15 @@ public class RickAndMortyFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_rickandmorty_list, container, false);
+//        View view = inflater.inflate(R.layout.fragment_rickandmorty_list, container, false);
 
-        recyclerView = view.findViewById(R.id.list);
+        binding = FragmentRickandmortyListBinding.inflate(getLayoutInflater());
+        mcontext = this.getActivity();
 
+        View view = binding.getRoot();
 
-        linearLayoutManager = new LinearLayoutManager(getContext());
+//        binding.list = view.findViewById(R.id.list);
+
         pd = new ProgressDialog(getContext());
 
         pd.setTitle("Obtain Characters");
@@ -109,13 +120,39 @@ public class RickAndMortyFragment extends Fragment {
         pd.setCancelable(false);
         pd.show();
 
-        rickMortyCharactersList = new ArrayList<>();
 
+        binding.list.setHasFixedSize(true);
+        linearLayoutManager = new LinearLayoutManager(getContext());
+        binding.list.setLayoutManager(linearLayoutManager);
+
+        rickMortyCharactersList = new ArrayList<>();
 
         loadFavoritesData();
 
+        adapterapi = new ListCharactersAdapter(mFavoritesList, rickMortyCharactersList);
+        binding.list.setAdapter(adapterapi);
+
+
         getCharacters();
 
+        binding.list.addOnScrollListener(new PaginationListener(linearLayoutManager) {
+            @Override
+            protected void loadMoreItems() {
+                isLoading = true;
+                currentPage++;
+                getCharacters();
+            }
+
+            @Override
+            public boolean isLastPage() {
+                return isLastPage;
+            }
+
+            @Override
+            public boolean isLoading() {
+                return isLoading;
+            }
+        });
 
         return view;
     }
@@ -126,7 +163,7 @@ public class RickAndMortyFragment extends Fragment {
     public void getCharacters() {
 
         rickMortyCharactersList.clear();
-        String url = "https://rickandmortyapi.com/api/character/?page=2";
+        String url = "https://rickandmortyapi.com/api/character/?page="+currentPage;
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -142,16 +179,28 @@ public class RickAndMortyFragment extends Fragment {
                             }.getType();
 
                             rickMortyResponse = new Gson().fromJson(response, type);
+
                             rickMortyCharactersList = rickMortyResponse.getResults();
-
-                            recyclerView.setHasFixedSize(true);
-                            recyclerView.setLayoutManager(linearLayoutManager);
-//                            DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
+                            totalPage= rickMortyResponse.getInfo().getPages();
+//                            DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(binding.list.getContext(),
 //                                    linearLayoutManager.getOrientation());
-//                            recyclerView.addItemDecoration(dividerItemDecoration);
+//                            binding.list.addItemDecoration(dividerItemDecoration);
 
-                            adapterapi = new ListCharactersAdapter(mFavoritesList, rickMortyCharactersList);
-                            recyclerView.setAdapter(adapterapi);
+//                            adapterapi = new ListCharactersAdapter(mFavoritesList, rickMortyCharactersList);
+//                            binding.list.setAdapter(adapterapi);
+
+                            if (currentPage != PAGE_START) adapterapi.removeLoading();
+                            adapterapi.addItems(rickMortyCharactersList);
+                            //swipeRefresh.setRefreshing(false);
+                            // check weather is last page or not
+
+                            if (currentPage < totalPage) {
+                                adapterapi.addLoading();
+                            } else {
+                                isLastPage = true;
+                            }
+                            isLoading = false;
+
                             adapterapi.notifyDataSetChanged();
 
                         }

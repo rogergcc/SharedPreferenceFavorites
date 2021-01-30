@@ -13,4 +13,6 @@
     android:background="@color/color_details"
 
     tools:context=".fragments.RickAndMortyFragment"
+    android:layout_margin="0dp"
+    android:padding="0dp"
     tools:listitem="@layout/items_character" />

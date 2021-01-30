@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/itemCardViewCharacter"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -94,7 +93,7 @@
                 android:layout_margin="4dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:padding="4dp"
+                android:padding="5dp"
                 android:src="@drawable/ic_star_black_24dp"
 
                 android:contentDescription="@string/app_name" />
