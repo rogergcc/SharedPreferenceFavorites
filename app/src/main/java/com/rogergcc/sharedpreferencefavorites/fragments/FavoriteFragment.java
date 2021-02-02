@@ -32,7 +32,6 @@ public class FavoriteFragment extends Fragment {
     private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
     private int mColumnCount = 1;
-    private OnListFragmentInteractionListener mListener;
     private RecyclerView recyclerView;
     private LinearLayoutManager layoutManager;
     private FavoritesCharactersAdapter favoritesAdapter;
@@ -46,15 +45,7 @@ public class FavoriteFragment extends Fragment {
     public FavoriteFragment() {
     }
 
-    // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
-    public static FavoriteFragment newInstance(int columnCount) {
-        FavoriteFragment fragment = new FavoriteFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
-        fragment.setArguments(args);
-        return fragment;
-    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -83,7 +74,7 @@ public class FavoriteFragment extends Fragment {
 
         if (productsFavorites.length() != 0) {
             favoritesList = new Gson().fromJson(productsFavorites, type);
-            FavoritesCharactersAdapter favoritesAdapter = new FavoritesCharactersAdapter(favoritesList, mListener);
+            FavoritesCharactersAdapter favoritesAdapter = new FavoritesCharactersAdapter(favoritesList);
             recyclerView.setAdapter(favoritesAdapter);
         }
 
@@ -95,33 +86,21 @@ public class FavoriteFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnListFragmentInteractionListener) {
-            mListener = (OnListFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnListFragmentInteractionListener");
-        }
+//        if (context instanceof OnListFragmentInteractionListener) {
+//            mListener = (OnListFragmentInteractionListener) context;
+//        } else {
+//            throw new RuntimeException(context.toString()
+//                    + " must implement OnListFragmentInteractionListener");
+//        }
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
+//        mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onListFragmentInteraction(RickMorty item);
-    }
+
+
 
 }

@@ -42,9 +42,6 @@
         android:theme="@style/NavigationViewTheme"
         app:headerLayout="@layout/nav_header_navigation"
 
-
-
-
         app:menu="@menu/activity_navigation_drawer" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

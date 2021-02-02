@@ -74,89 +74,12 @@ public class ListCharactersAdapter extends RecyclerView.Adapter<BaseViewHolder> 
                 return new ProgressHolder(
                         itemLoadingBinding);
             default:
+
                 return null;
         }
 
     }
 
-//    @Override
-//    public void onBindViewHolder(final ViewHolder holder, int position) {
-//        holder.mItem = mValues.get(position);
-//        final int pos = holder.getAdapterPosition();
-//        //Set ViewTag
-//        holder.itemView.setTag(pos);
-//
-//        holder.mname_character.setText(mValues.get(position).getName());
-//        holder.mdetails_status.setText(mValues.get(position).getStatus());
-//        holder.mdetails_species.setText(mValues.get(position).getSpecies());
-//        holder.mdetails_gender.setText(mValues.get(position).getGender());
-//        holder.mdetails_origin.setText(mValues.get(position).getOrigin().getName());
-//        holder.mdetails_last_location.setText(mValues.get(position).getLocation().getName());
-//
-//
-//        RequestOptions requestOptions = new RequestOptions()
-//                .fitCenter()
-//                .placeholder(R.drawable.imagesloading)
-//                .centerInside()
-////                .error(R.drawable.cinema_filled_error)
-//                .diskCacheStrategy(DiskCacheStrategy.ALL)
-//                .priority(Priority.HIGH)
-//                .dontAnimate()
-//                .dontTransform();
-//
-//        Glide.with(holder.itemView.getContext())
-//                .load(mValues.get(position).getImage())
-//                .apply(requestOptions)
-//                .into(holder.mimage_character);
-//
-//        if (mFavoritesList.size() != 0) {
-//            boolean itemExists = checkAvailability(mFavoritesList, mValues.get(position));
-//
-//            if (itemExists) {
-//                holder.mselect_favorite.setColorFilter(ContextCompat.getColor(holder.itemView.getContext(),
-//                        R.color.color_select_favorite));
-//
-//                holder.itemCardViewCharacter.setCardBackgroundColor( ContextCompat.getColor(holder.mView.getContext(), R.color.colorPrimaryDark));
-//
-//            } else {
-//                holder.itemCardViewCharacter.setCardBackgroundColor( ContextCompat.getColor(holder.mView.getContext(), R.color.color_details));
-//                holder.mselect_favorite.clearColorFilter();
-//            }
-//        }
-//
-//
-//        holder.mselect_favorite.setOnClickListener(new View.OnClickListener() {
-//            int button01pos = 0;
-//
-//            @Override
-//            public void onClick(View v) {
-//                GsonBuilder builder = new GsonBuilder();
-//                Gson gson = builder.create();
-//
-//                sharedPreference = new MySharedPreference(holder.itemView.getContext());
-//                if (holder.mselect_favorite.getColorFilter() != null) {
-//                    holder.itemCardViewCharacter.setCardBackgroundColor( ContextCompat.getColor(holder.mView.getContext(), R.color.color_details));
-//                    holder.mselect_favorite.clearColorFilter();
-//                    mFavoritesList.remove(mValues.get(pos));
-//
-//                    String addNewItem = gson.toJson(mFavoritesList);
-//
-//                    sharedPreference.saveFavoritesMarkers(addNewItem);
-//                } else {
-//                    holder.itemCardViewCharacter.setCardBackgroundColor( ContextCompat.getColor(holder.mView.getContext(), R.color.colorPrimaryDark));
-//                    holder.mselect_favorite.setColorFilter(ContextCompat.getColor(holder.itemView.getContext(),
-//                            R.color.color_select_favorite));
-//                    mFavoritesList.add(mValues.get(pos));
-//
-//                    String addNewItem = gson.toJson(mFavoritesList);
-//                    sharedPreference.saveFavoritesMarkers(addNewItem);
-//
-//                }
-//
-//
-//            }
-//        });
-//    }
 
     @Override
     public void onBindViewHolder(@NonNull BaseViewHolder holder, int position) {
@@ -222,40 +145,6 @@ public class ListCharactersAdapter extends RecyclerView.Adapter<BaseViewHolder> 
     }
     //endregion
 
-//    public static class ViewHolder extends RecyclerView.ViewHolder {
-//        public final View mView;
-//        public final CardView itemCardViewCharacter;
-//        public final TextView mname_character;
-//
-//        private final TextView mdetails_status;
-//        private final TextView mdetails_species;
-//        private final TextView mdetails_gender;
-//        private final TextView mdetails_origin;
-//        private final TextView mdetails_last_location;
-//        private final ImageView mimage_character;
-//        private final ImageView mselect_favorite;
-//        public RickMorty mItem;
-//
-//        public ViewHolder(View view) {
-//            super(view);
-//            mView = view;
-//            itemCardViewCharacter = view.findViewById(R.id.itemCardViewCharacter);
-//            mimage_character = view.findViewById(R.id.image_character);
-//            mselect_favorite = view.findViewById(R.id.select_favorite);
-//
-//            mname_character = view.findViewById(R.id.name_character);
-//            mdetails_status = view.findViewById(R.id.details_status);
-//            mdetails_species = view.findViewById(R.id.details_species);
-//            mdetails_gender = view.findViewById(R.id.details_gender);
-//            mdetails_origin = view.findViewById(R.id.details_origin);
-//            mdetails_last_location = view.findViewById(R.id.details_last_location);
-//        }
-//
-//        @Override
-//        public String toString() {
-//            return super.toString() + " '" + mname_character.getText() + "'";
-//        }
-//    }
 
     public class ViewHolder extends BaseViewHolder {
         ItemsCharacterBinding binding;

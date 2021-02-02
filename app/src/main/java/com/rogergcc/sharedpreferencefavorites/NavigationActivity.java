@@ -22,12 +22,11 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.navigation.NavigationView;
 import com.rogergcc.sharedpreferencefavorites.fragments.FavoriteFragment;
 import com.rogergcc.sharedpreferencefavorites.fragments.RickAndMortyFragment;
-import com.rogergcc.sharedpreferencefavorites.model.RickMorty;
 
 public class NavigationActivity extends AppCompatActivity
-        implements
+
 //        NavigationView.OnNavigationItemSelectedListener,
-        FavoriteFragment.OnListFragmentInteractionListener {
+{
 
     private DrawerLayout drawer;
 
@@ -49,16 +48,12 @@ public class NavigationActivity extends AppCompatActivity
         toggle.syncState();
 
 //        navigationView.setNavigationItemSelectedListener(this);
-
-
         if (navigationView != null) {
             prepararDrawer(navigationView);
             // Seleccionar item por defecto
             seleccionarItem(navigationView.getMenu().getItem(0));
         }
-
         drawer.setVerticalFadingEdgeEnabled(true);
-
     }
 
     private void prepararDrawer(NavigationView navigationView) {
@@ -83,7 +78,7 @@ public class NavigationActivity extends AppCompatActivity
             case R.id.nav_home:
                 fragmentoGenerico = new RickAndMortyFragment();
                 break;
-            case R.id.nav_gallery:
+            case R.id.nav_locations:
 
                 break;
             case R.id.nav_favorites:
@@ -102,6 +97,8 @@ public class NavigationActivity extends AppCompatActivity
             case R.id.nav_send:
                 //startActivity(new Intent(this, ActividadConfiguracion.class));
                 break;
+            default:
+
         }
 
 
@@ -121,7 +118,7 @@ public class NavigationActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         final ActionBar ab = getSupportActionBar();
         if (ab != null) {
-            // Poner ícono del drawer toggle
+            // Poner icono del drawer toggle
 //            ab.setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp);
 //            ab.setDisplayHomeAsUpEnabled(true);
         }
@@ -161,72 +158,4 @@ public class NavigationActivity extends AppCompatActivity
     }
 
 
-//    private void initToolbar() {
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-//        final ActionBar ab = getSupportActionBar();
-//        if (ab != null) {
-//            // Poner ícono del drawer toggle
-//            ab.setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp);
-//            ab.setDisplayHomeAsUpEnabled(true);
-//        }
-//
-//    }
-
-//    @SuppressWarnings("StatementWithEmptyBody")
-//    @Override
-//    public boolean onNavigationItemSelected(MenuItem item) {
-//        Fragment genericFragment = null;
-//        FragmentManager fragmentManager = getSupportFragmentManager();
-//
-//        // Handle navigation view item clicks here.
-//        int id = item.getItemId();
-//
-//
-//        switch (item.getItemId()) {
-//            case R.id.nav_home:
-//                genericFragment = new RickAndMortyFragment();
-//                break;
-//            case R.id.nav_gallery:
-//
-//                break;
-//            case R.id.nav_favorites:
-//
-//                genericFragment = new FavoriteCharactersFragment();
-//
-//                break;
-//            case R.id.nav_tools:
-////                fragmentoGenerico = new FragmentoServicios();
-//
-//
-//                break;
-//            case R.id.nav_share:
-//                //startActivity(new Intent(this, ActividadConfiguracion.class));
-//                break;
-//            case R.id.nav_send:
-//                //startActivity(new Intent(this, ActividadConfiguracion.class));
-//                break;
-//        }
-//
-//
-//        if (genericFragment != null) {
-//            fragmentManager
-//                    .beginTransaction()
-//                    .replace(R.id.principal_container, genericFragment)
-//                    .commit();
-//        }
-//
-//
-//        setTitle(item.getTitle());
-//
-//        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-//        drawer.closeDrawer(GravityCompat.START);
-//        return true;
-//    }
-
-
-    @Override
-    public void onListFragmentInteraction(RickMorty item) {
-
-    }
 }

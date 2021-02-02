@@ -4,6 +4,10 @@
  */
 
 apply plugin: 'com.android.application'
+apply plugin: "androidx.navigation.safeargs"
+
+def localProperties = new Properties()
+localProperties.load(new FileInputStream(rootProject.file("local.properties")))
 
 android {
     compileSdkVersion 30
@@ -17,7 +21,17 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        debug {
+
+            buildConfigField "String", "POST_URL", postsUrl
+            resValue("string", "google_maps_key", localProperties['apiKey'])
+            // use in app R.string.google_maps_key
+            //getResources().getString(R.string.google_maps_key);
+        }
         release {
+
+            buildConfigField "String", "POST_URL", postsUrl
+            resValue("string", "google_maps_key", localProperties['apiKey'])
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -27,18 +41,34 @@ android {
 //        dataBinding true
         viewBinding true
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 
 }
 
 dependencies {
+    def navigation_version = "2.3.2"
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
-    implementation 'androidx.navigation:navigation-fragment:2.3.2'
-    implementation 'androidx.navigation:navigation-ui:2.3.2'
+
+//    implementation 'androidx.navigation:navigation-fragment:2.3.2'
+//    implementation 'androidx.navigation:navigation-ui:2.3.2'
+
+    // jetpack navigation component
+    implementation "androidx.navigation:navigation-fragment:$navigation_version"
+    implementation "androidx.navigation:navigation-ui:$navigation_version"
+
+    // Feature module Support
+    implementation "androidx.navigation:navigation-dynamic-features-fragment:$navigation_version"
+//    implementation "androidx.navigation:navigation-dynamic-features-fragment:$navigation_version"
+
     testImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'androidx.test:runner:1.3.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'

@@ -6,15 +6,12 @@
     android:layout_height="wrap_content"
 
     android:layout_marginStart="10dp"
-
-
     android:layout_marginTop="4dp"
-
     android:layout_marginEnd="10dp"
     android:layout_marginBottom="4dp"
+
     android:clickable="true"
     android:focusable="true"
-
     android:foreground="?android:attr/selectableItemBackground"
     card_view:cardCornerRadius="7dp"
     card_view:cardElevation="1dp"
@@ -60,13 +57,14 @@
                 android:id="@+id/name_character"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="start|bottom"
+                android:layout_gravity="left|bottom"
                 android:layout_marginTop="10dp"
                 android:background="@color/colorblacktransparent"
                 android:ellipsize="end"
                 android:fontFamily="sans-serif-condensed-light"
-                android:gravity="center"
+                android:gravity="left"
 
+                android:paddingLeft="@dimen/padding_left"
 
                 android:text="@string/tv_character_name"
                 android:textAppearance="?android:attr/textAppearanceSmall"

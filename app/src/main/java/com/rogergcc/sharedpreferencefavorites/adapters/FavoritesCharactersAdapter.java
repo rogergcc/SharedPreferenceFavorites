@@ -19,7 +19,6 @@ import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.rogergcc.sharedpreferencefavorites.R;
-import com.rogergcc.sharedpreferencefavorites.fragments.FavoriteFragment.OnListFragmentInteractionListener;
 import com.rogergcc.sharedpreferencefavorites.model.RickMorty;
 
 import java.util.List;
@@ -28,11 +27,10 @@ import java.util.List;
 public class FavoritesCharactersAdapter extends RecyclerView.Adapter<FavoritesCharactersAdapter.ViewHolder> {
 
     private final List<RickMorty> mValues;
-    private final OnListFragmentInteractionListener mListener;
 
-    public FavoritesCharactersAdapter(List<RickMorty> items, OnListFragmentInteractionListener listener) {
+    public FavoritesCharactersAdapter(List<RickMorty> items) {
         mValues = items;
-        mListener = listener;
+
     }
 
     @NonNull
@@ -74,11 +72,7 @@ public class FavoritesCharactersAdapter extends RecyclerView.Adapter<FavoritesCh
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (null != mListener) {
-                    // Notify the active callbacks interface (the activity, if the
-                    // fragment is attached to one) that an item has been selected.
-                    mListener.onListFragmentInteraction(holder.mItem);
-                }
+
             }
         });
     }

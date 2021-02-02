@@ -5,7 +5,6 @@
 
 package com.rogergcc.sharedpreferencefavorites.fragments;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -17,6 +16,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NoConnectionError;
@@ -61,7 +61,7 @@ public class RickAndMortyFragment extends Fragment {
 
     private int currentPage = PAGE_START;
     private boolean isLastPage = false;
-    private int totalPage = 3;
+    private int totalPage = 2;
     private boolean isLoading = false;
     private FragmentRickandmortyListBinding binding;
     private Context mcontext;
@@ -73,15 +73,7 @@ public class RickAndMortyFragment extends Fragment {
     public RickAndMortyFragment() {
     }
 
-    // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
-    public static RickAndMortyFragment newInstance(int columnCount) {
-        RickAndMortyFragment fragment = new RickAndMortyFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
-        fragment.setArguments(args);
-        return fragment;
-    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -94,11 +86,6 @@ public class RickAndMortyFragment extends Fragment {
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
 
-        Activity a;
-
-        if (context instanceof Activity){
-            a=(Activity) context;
-        }
 
     }
     @Override
@@ -122,7 +109,8 @@ public class RickAndMortyFragment extends Fragment {
 
 
         binding.list.setHasFixedSize(true);
-        linearLayoutManager = new LinearLayoutManager(getContext());
+        linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL,false);
+
         binding.list.setLayoutManager(linearLayoutManager);
 
         rickMortyCharactersList = new ArrayList<>();
@@ -131,7 +119,6 @@ public class RickAndMortyFragment extends Fragment {
 
         adapterapi = new ListCharactersAdapter(mFavoritesList, rickMortyCharactersList);
         binding.list.setAdapter(adapterapi);
-
 
         getCharacters();
 
@@ -233,7 +220,7 @@ public class RickAndMortyFragment extends Fragment {
     }
 
     private void loadFavoritesData() {
-        MySharedPreference sharedPreference = new MySharedPreference(getContext());
+        MySharedPreference sharedPreference = new MySharedPreference(mcontext);
         String productsFromCart = sharedPreference.retrieveFavorites();
         Type type = new TypeToken<ArrayList<RickMorty>>() {
         }.getType();
