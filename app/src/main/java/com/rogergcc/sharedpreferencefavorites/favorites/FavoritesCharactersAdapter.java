@@ -1,9 +1,9 @@
 /*
  * Created by rogergcc
- * Copyright Ⓒ 2019 . All rights reserved.
+ * Copyright Ⓒ 2021 . All rights reserved.
  */
 
-package com.rogergcc.sharedpreferencefavorites.adapters;
+package com.rogergcc.sharedpreferencefavorites.favorites;
 
 import android.view.LayoutInflater;
 import android.view.View;

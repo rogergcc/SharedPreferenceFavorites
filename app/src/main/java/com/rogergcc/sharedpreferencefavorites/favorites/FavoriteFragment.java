@@ -1,15 +1,16 @@
 /*
  * Created by rogergcc
- * Copyright Ⓒ 2019 . All rights reserved.
+ * Copyright Ⓒ 2021 . All rights reserved.
  */
 
-package com.rogergcc.sharedpreferencefavorites.fragments;
+package com.rogergcc.sharedpreferencefavorites.favorites;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,7 +19,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.rogergcc.sharedpreferencefavorites.R;
-import com.rogergcc.sharedpreferencefavorites.adapters.FavoritesCharactersAdapter;
 import com.rogergcc.sharedpreferencefavorites.helpers.MySharedPreference;
 import com.rogergcc.sharedpreferencefavorites.model.RickMorty;
 
@@ -38,19 +38,14 @@ public class FavoriteFragment extends Fragment {
     private MySharedPreference mShared;
     private List<RickMorty> favoritesList;
 
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
+    private RelativeLayout llEmptyList;
+
     public FavoriteFragment() {
     }
-
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
 
     }
 
@@ -60,7 +55,9 @@ public class FavoriteFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_favorite_list, container, false);
 
         Context context = view.getContext();
-        recyclerView = (RecyclerView) view.findViewById(R.id.list);
+        recyclerView = view.findViewById(R.id.list);
+        llEmptyList = view.findViewById(R.id.llEmptyList);
+
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
 
@@ -68,14 +65,19 @@ public class FavoriteFragment extends Fragment {
 
         mShared = new MySharedPreference(context);
 
-        String productsFavorites = mShared.retrieveFavorites();
+        String favoriteCharacters = mShared.retrieveFavorites();
+
+//        Toast.makeText(context, "ROGER" + productsFavorites, Toast.LENGTH_SHORT).show();
         Type type = new TypeToken<ArrayList<RickMorty>>() {
         }.getType();
 
-        if (productsFavorites.length() != 0) {
-            favoritesList = new Gson().fromJson(productsFavorites, type);
+        if (favoriteCharacters.length() != 0 && !favoriteCharacters.equals("[]")) {
+            favoritesList = new Gson().fromJson(favoriteCharacters, type);
             FavoritesCharactersAdapter favoritesAdapter = new FavoritesCharactersAdapter(favoritesList);
             recyclerView.setAdapter(favoritesAdapter);
+            llEmptyList.setVisibility(View.GONE);
+        } else {
+            llEmptyList.setVisibility(View.VISIBLE);
         }
 
 
@@ -99,8 +101,6 @@ public class FavoriteFragment extends Fragment {
         super.onDetach();
 //        mListener = null;
     }
-
-
 
 
 }

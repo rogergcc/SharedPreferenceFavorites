@@ -17,4 +17,5 @@
     <color name="detail_tex">#9E9E9E</color>
     <color name="detail_text_value">#FF9800</color>
     <color name="color_select_favorite">#EF6C00</color>
+    <color name="black_effective">#2a2a2a</color>
 </resources>

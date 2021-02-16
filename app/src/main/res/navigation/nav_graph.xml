@@ -11,12 +11,16 @@
     app:startDestination="@id/nav_home">
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.rogergcc.sharedpreferencefavorites.fragments.RickAndMortyFragment"
+        android:name="com.rogergcc.sharedpreferencefavorites.homecharacters.RickAndMortyFragment"
         tools:layout="@layout/fragment_rickandmorty_list"
         android:label="@string/menu_home" />
     <fragment
         android:id="@+id/nav_favorites"
-        android:name="com.rogergcc.sharedpreferencefavorites.fragments.FavoriteFragment"
+        android:name="com.rogergcc.sharedpreferencefavorites.favorites.FavoriteFragment"
         tools:layout="@layout/fragment_favorite_list"
         android:label="@string/menu_favorites" />
+    <fragment
+        android:id="@+id/nav_locations"
+        android:name="com.rogergcc.sharedpreferencefavorites.locations.LocationsFragment"
+        android:label="LocationsFragment" />
 </navigation>

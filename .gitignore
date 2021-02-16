@@ -3,6 +3,9 @@
 *.ap_
 *.aab
 
+# keys credentials
+credentials.json
+
 # Files for the ART/Dalvik VM
 *.dex
 

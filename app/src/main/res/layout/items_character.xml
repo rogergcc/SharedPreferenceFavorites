@@ -13,17 +13,17 @@
     android:clickable="true"
     android:focusable="true"
     android:foreground="?android:attr/selectableItemBackground"
-    card_view:cardCornerRadius="7dp"
-    card_view:cardElevation="1dp"
-
     card_view:cardBackgroundColor="@color/color_details"
+    card_view:cardCornerRadius="7dp"
+
+    card_view:cardElevation="1dp"
 
     >
 
     <LinearLayout
 
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:padding="0dp">
 
         <FrameLayout
@@ -35,10 +35,11 @@
             <ImageView
                 android:id="@+id/image_character"
                 android:layout_width="wrap_content"
-                android:layout_height="210dp"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/app_name"
                 android:scaleType="centerCrop"
-                android:src="@drawable/character_image"
-                android:contentDescription="@string/app_name" />
+                android:src="@drawable/character_image" />
 
             <!--<ImageView-->
             <!--android:id="@+id/select_favorito"-->
@@ -57,21 +58,23 @@
                 android:id="@+id/name_character"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left|bottom"
+                android:layout_gravity="start|bottom"
                 android:layout_marginTop="10dp"
                 android:background="@color/colorblacktransparent"
                 android:ellipsize="end"
-                android:fontFamily="sans-serif-condensed-light"
-                android:gravity="left"
 
-                android:paddingLeft="@dimen/padding_left"
+
+                android:fontFamily="@font/poppins"
+                android:gravity="center"
+
+
 
                 android:text="@string/tv_character_name"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-
                 android:textColor="@android:color/white"
-                android:textStyle="bold"
-                 />
+
+                android:textSize="12sp"
+                android:textStyle="bold" />
 
         </FrameLayout>
 
@@ -90,11 +93,11 @@
                 android:layout_gravity="end|top"
                 android:layout_margin="4dp"
                 android:clickable="true"
+                android:contentDescription="@string/app_name"
                 android:focusable="true"
                 android:padding="5dp"
-                android:src="@drawable/ic_star_black_24dp"
 
-                android:contentDescription="@string/app_name" />
+                android:src="@drawable/ic_star_black_24dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -111,6 +114,7 @@
                     android:textSize="12sp" />
 
                 <TextView
+                    android:fontFamily="@font/montserrat"
                     android:id="@+id/details_status"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -118,22 +122,17 @@
                     android:textColor="@color/detail_text_value"
                     android:textSize="12sp" />
 
-                <!--<View-->
-                <!--android:layout_marginTop="10dp"-->
-                <!--android:id="@+id/view1"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="1dp"-->
-                <!--android:background="#c0c0c0"/>-->
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
+                    android:layout_marginTop="3dp"
                     android:text="SPECIES"
                     android:textColor="@color/detail_tex"
                     android:textSize="12sp" />
 
                 <TextView
+                    android:fontFamily="@font/montserrat"
                     android:id="@+id/details_species"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -145,12 +144,13 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
+                    android:layout_marginTop="3dp"
                     android:text="GENDER"
                     android:textColor="@color/detail_tex"
                     android:textSize="12sp" />
 
                 <TextView
+                    android:fontFamily="@font/montserrat"
                     android:id="@+id/details_gender"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -162,12 +162,13 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
+                    android:layout_marginTop="3dp"
                     android:text="ORIGIN"
                     android:textColor="@color/detail_tex"
                     android:textSize="12sp" />
 
                 <TextView
+                    android:fontFamily="@font/montserrat"
                     android:id="@+id/details_origin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -179,12 +180,13 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
+                    android:layout_marginTop="3dp"
                     android:text="LAST LOCATION"
                     android:textColor="@color/detail_tex"
                     android:textSize="12sp" />
 
                 <TextView
+                    android:fontFamily="@font/montserrat"
                     android:id="@+id/details_last_location"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

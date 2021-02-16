@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/itemCardViewCharacter"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    android:layout_marginStart="10dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginEnd="10dp"
+    android:layout_marginBottom="4dp"
+
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    card_view:cardBackgroundColor="@color/black_effective"
+    card_view:cardCornerRadius="7dp"
+
+    card_view:cardElevation="1dp"
+
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="4dp">
+
+        <TextView
+
+            android:id="@+id/tvNameLocation"
+            style="@style/TextAppearance.AppCompat.Large"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding_left"
+            android:fontFamily="@font/montserrat"
+            android:text="Nombre"
+            android:textColor="@color/color_select_favorite" />
+
+        <TextView
+            android:id="@+id/tvTypeLocation"
+            style="@style/TextAppearance.AppCompat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top"
+            android:fontFamily="@font/poppins"
+            android:text="Tipo"
+            android:textColor="@color/detail_text_value" />
+
+        <TextView
+            android:fontFamily="@font/poppins"
+            android:id="@+id/tvDimensionLocation"
+            style="@style/TextAppearance.AppCompat.Caption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top"
+            android:text="Dimension"
+            android:textColor="@color/detail_tex" />
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

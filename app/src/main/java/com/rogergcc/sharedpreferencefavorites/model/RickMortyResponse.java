@@ -33,4 +33,12 @@ public class RickMortyResponse {
     //https://rickandmortyapi.com/api/character/
 
 
+    @Override
+    public String toString() {
+        return "RickMortyResponse{" +
+                "info=" + info +
+                ", results=" + results +
+                '}';
+    }
+
 }

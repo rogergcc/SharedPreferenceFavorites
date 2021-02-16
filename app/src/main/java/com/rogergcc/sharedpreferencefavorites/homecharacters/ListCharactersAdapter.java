@@ -1,9 +1,9 @@
 /*
  * Created by rogergcc
- * Copyright Ⓒ 2019 . All rights reserved.
+ * Copyright Ⓒ 2021 . All rights reserved.
  */
 
-package com.rogergcc.sharedpreferencefavorites.adapters;
+package com.rogergcc.sharedpreferencefavorites.homecharacters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,7 +32,7 @@ public class ListCharactersAdapter extends RecyclerView.Adapter<BaseViewHolder> 
 
     private static final int VIEW_TYPE_LOADING = 0;
     private static final int VIEW_TYPE_NORMAL = 1;
-    private final List<RickMorty> mValues;
+    private List<RickMorty> mValues;
     private MySharedPreference sharedPreference;
     private List<RickMorty> mFavoritesList;
     private boolean isLoaderVisible = false;
@@ -60,23 +60,26 @@ public class ListCharactersAdapter extends RecyclerView.Adapter<BaseViewHolder> 
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
 
         ItemsCharacterBinding binding = ItemsCharacterBinding.inflate(layoutInflater, parent, false);
-        ItemLoadingBinding itemLoadingBinding = ItemLoadingBinding.inflate(layoutInflater, parent, false);
+//        ItemLoadingBinding itemLoadingBinding = ItemLoadingBinding.inflate(layoutInflater, parent, false);
 
 //        View view = LayoutInflater.from(parent.getContext())
 //                .inflate(R.layout.items_character, parent, false);
-//        return new ViewHolder(view);
+//        return new ListViewHolder(view);
+        return new ViewHolder(
+                binding);
 
-        switch (viewType) {
-            case VIEW_TYPE_NORMAL:
-                return new ViewHolder(
-                        binding);
-            case VIEW_TYPE_LOADING:
-                return new ProgressHolder(
-                        itemLoadingBinding);
-            default:
+//        switch (viewType) {
+//            case VIEW_TYPE_NORMAL:
+//                return new ListViewHolder(
+//                        binding);
+//            case VIEW_TYPE_LOADING:
+//                return new ProgressHolder(
+//                        itemLoadingBinding);
+//            default:
+//
+//                return null;
+//        }
 
-                return null;
-        }
 
     }
 

@@ -30,7 +30,7 @@ public class MySharedPreference {
         edits.apply();
     }
     public String retrieveFavorites(){
-        return prefs.getString(Constants.FAVORITE_ID, null);
+        return prefs.getString(Constants.FAVORITE_ID, "");
     }
 
     public void addFavoriteCount(int productCount){

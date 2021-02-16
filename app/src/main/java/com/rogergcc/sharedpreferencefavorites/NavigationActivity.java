@@ -20,8 +20,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.navigation.NavigationView;
-import com.rogergcc.sharedpreferencefavorites.fragments.FavoriteFragment;
-import com.rogergcc.sharedpreferencefavorites.fragments.RickAndMortyFragment;
+import com.rogergcc.sharedpreferencefavorites.favorites.FavoriteFragment;
+import com.rogergcc.sharedpreferencefavorites.homecharacters.RickAndMortyFragment;
 
 public class NavigationActivity extends AppCompatActivity
 

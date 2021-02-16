@@ -1,3 +1,5 @@
+import groovy.json.JsonSlurper
+
 /*
  * Created by rogergcc
  * Copyright Ⓒ 2019 . All rights reserved.
@@ -10,6 +12,17 @@ def localProperties = new Properties()
 localProperties.load(new FileInputStream(rootProject.file("local.properties")))
 
 android {
+    signingConfigs {
+        release {
+            def credsFilePath = file("../credentials.json").toString()
+            def credsFile = new File(credsFilePath, "").getText('UTF-8')
+            def json = new JsonSlurper().parseText(credsFile)
+            storeFile file(json.hms.storeFile)
+            storePassword = json.hms.storePassword
+            keyAlias = json.hms.keyAlias
+            keyPassword = json.hms.keyPassword
+        }
+    }
     compileSdkVersion 30
     buildToolsVersion "29.0.3"
     defaultConfig {
@@ -22,6 +35,9 @@ android {
     }
     buildTypes {
         debug {
+            versionNameSuffix "-DEBUG"
+            applicationIdSuffix ".debug"
+            debuggable true
 
             buildConfigField "String", "POST_URL", postsUrl
             resValue("string", "google_maps_key", localProperties['apiKey'])
@@ -29,6 +45,9 @@ android {
             //getResources().getString(R.string.google_maps_key);
         }
         release {
+            signingConfig signingConfigs.release
+            debuggable false
+//            shrinkResources true
 
             buildConfigField "String", "POST_URL", postsUrl
             resValue("string", "google_maps_key", localProperties['apiKey'])
@@ -79,4 +98,13 @@ dependencies {
     implementation 'com.android.volley:volley:1.1.1'
 
     implementation 'com.github.bumptech.glide:glide:4.11.0'
+
+    //retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.6.2'
+    implementation 'com.squareup.retrofit2:converter-scalars:2.6.1'
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.1'
+
+//    timberVersion = '4.5.1'
+    // logger
+    implementation "com.jakewharton.timber:timber:4.5.1"
 }
