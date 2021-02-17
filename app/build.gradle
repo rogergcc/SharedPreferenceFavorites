@@ -21,6 +21,8 @@ android {
             storePassword = json.hms.storePassword
             keyAlias = json.hms.keyAlias
             keyPassword = json.hms.keyPassword
+            v1SigningEnabled true
+            v2SigningEnabled true
         }
     }
     compileSdkVersion 30
@@ -29,8 +31,8 @@ android {
         applicationId "com.rogergcc.sharedpreferencefavorites"
         minSdkVersion 19
         targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -94,9 +96,7 @@ dependencies {
 
     //serializar Gson
     implementation 'com.google.code.gson:gson:2.8.6'
-
     implementation 'com.android.volley:volley:1.1.1'
-
     implementation 'com.github.bumptech.glide:glide:4.11.0'
 
     //retrofit
@@ -107,4 +107,10 @@ dependencies {
 //    timberVersion = '4.5.1'
     // logger
     implementation "com.jakewharton.timber:timber:4.5.1"
+
+    def lifecycle_version = "2.2.0"
+//    implementation "android.arch.lifecycle:extensions:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
+//    annotationProcessor "android.arch.lifecycle:compiler:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
 }

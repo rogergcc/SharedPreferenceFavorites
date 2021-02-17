@@ -3,7 +3,7 @@
  * Copyright Ⓒ 2021 . All rights reserved.
  */
 
-package com.rogergcc.sharedpreferencefavorites.favorites;
+package com.rogergcc.sharedpreferencefavorites.ui.favorites;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -19,8 +19,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.rogergcc.sharedpreferencefavorites.R;
-import com.rogergcc.sharedpreferencefavorites.helpers.MySharedPreference;
 import com.rogergcc.sharedpreferencefavorites.model.RickMorty;
+import com.rogergcc.sharedpreferencefavorites.ui.helpers.MySharedPreference;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;

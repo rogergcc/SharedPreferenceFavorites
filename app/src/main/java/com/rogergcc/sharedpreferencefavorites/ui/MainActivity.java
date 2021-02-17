@@ -1,9 +1,9 @@
 /*
  * Created by rogergcc
- * Copyright Ⓒ 2019 . All rights reserved.
+ * Copyright Ⓒ 2021 . All rights reserved.
  */
 
-package com.rogergcc.sharedpreferencefavorites;
+package com.rogergcc.sharedpreferencefavorites.ui;
 
 import android.os.Bundle;
 
@@ -17,6 +17,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
+import com.rogergcc.sharedpreferencefavorites.R;
 
 //NAVIGATION DRAWER WITH jetpack navigation component
 
@@ -38,17 +39,14 @@ public class MainActivity extends AppCompatActivity {
 //                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
 //        drawer.addDrawerListener(toggle);
 //        toggle.syncState();
-
         NavigationView navigationView = findViewById(R.id.nav_view);
 
-
         appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_favorites,R.id.nav_locations)
+                R.id.nav_home, R.id.nav_favorites, R.id.nav_locations)
                 .setOpenableLayout(drawer)
                 .build();
 
-
-        NavHostFragment navHostFragment =(NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
 
         if (navHostFragment == null) {
             return;

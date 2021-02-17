@@ -3,7 +3,7 @@
  * Copyright Ⓒ 2021 . All rights reserved.
  */
 
-package com.rogergcc.sharedpreferencefavorites.locations;
+package com.rogergcc.sharedpreferencefavorites.ui.locations;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -22,8 +22,8 @@ import com.rogergcc.sharedpreferencefavorites.R;
 import com.rogergcc.sharedpreferencefavorites.databinding.FragmentLocationsBinding;
 import com.rogergcc.sharedpreferencefavorites.remote.CommonApiUrl;
 import com.rogergcc.sharedpreferencefavorites.remote.model.LocationResponse;
-import com.rogergcc.sharedpreferencefavorites.utils.AppLogger;
-import com.rogergcc.sharedpreferencefavorites.utils.CommonUtils;
+import com.rogergcc.sharedpreferencefavorites.ui.utils.AppLogger;
+import com.rogergcc.sharedpreferencefavorites.ui.utils.CommonUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +31,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 
-import static com.rogergcc.sharedpreferencefavorites.helpers.PaginationListener.PAGE_START;
+import static com.rogergcc.sharedpreferencefavorites.ui.helpers.PaginationListener.PAGE_START;
 
 
 public class LocationsFragment extends Fragment {

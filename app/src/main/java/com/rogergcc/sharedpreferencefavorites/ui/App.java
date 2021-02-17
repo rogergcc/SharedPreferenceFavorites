@@ -1,16 +1,16 @@
-package com.rogergcc.sharedpreferencefavorites;
+/*
+ * Created by rogergcc
+ * Copyright Ⓒ 2021 . All rights reserved.
+ */
+
+package com.rogergcc.sharedpreferencefavorites.ui;
 
 import android.app.Application;
 import android.content.res.Resources;
 
-import com.rogergcc.sharedpreferencefavorites.helpers.ConnectivityReceiver;
-import com.rogergcc.sharedpreferencefavorites.utils.AppLogger;
+import com.rogergcc.sharedpreferencefavorites.ui.helpers.ConnectivityReceiver;
+import com.rogergcc.sharedpreferencefavorites.ui.utils.AppLogger;
 
-
-/**
- * Created by rogergcc on 2/03/2020.
- * Copyright Ⓒ 2020 . All rights reserved.
- */
 
 public class App extends Application {
     private static Resources resources;

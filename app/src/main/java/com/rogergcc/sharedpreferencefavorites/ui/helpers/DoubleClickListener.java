@@ -3,7 +3,7 @@
  * Copyright Ⓒ 2021 . All rights reserved.
  */
 
-package com.rogergcc.sharedpreferencefavorites.helpers;
+package com.rogergcc.sharedpreferencefavorites.ui.helpers;
 
 import android.os.SystemClock;
 import android.view.View;

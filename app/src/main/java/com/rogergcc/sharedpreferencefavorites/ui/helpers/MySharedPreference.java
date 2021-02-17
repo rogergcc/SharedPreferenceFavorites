@@ -3,13 +3,14 @@
  * Copyright Ⓒ 2019 . All rights reserved.
  */
 
-package com.rogergcc.sharedpreferencefavorites.helpers;
+package com.rogergcc.sharedpreferencefavorites.ui.helpers;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.rogergcc.sharedpreferencefavorites.ui.utils.Constants;
 
 
 public class MySharedPreference {

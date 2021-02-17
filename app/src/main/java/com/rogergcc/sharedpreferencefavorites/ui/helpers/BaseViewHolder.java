@@ -1,4 +1,4 @@
-package com.rogergcc.sharedpreferencefavorites.helpers;
+package com.rogergcc.sharedpreferencefavorites.ui.helpers;
 
 import android.view.View;
 

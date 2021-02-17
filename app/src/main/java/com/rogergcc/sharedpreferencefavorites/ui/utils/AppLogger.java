@@ -3,7 +3,7 @@
  * Copyright Ⓒ 2021 . All rights reserved.
  */
 
-package com.rogergcc.sharedpreferencefavorites.utils;
+package com.rogergcc.sharedpreferencefavorites.ui.utils;
 
 import com.rogergcc.sharedpreferencefavorites.BuildConfig;
 

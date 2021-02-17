@@ -3,7 +3,7 @@
  * Copyright Ⓒ 2021 . All rights reserved.
  */
 
-package com.rogergcc.sharedpreferencefavorites.locations;
+package com.rogergcc.sharedpreferencefavorites.ui.locations;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,9 +14,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.rogergcc.sharedpreferencefavorites.databinding.ItemLoadingBinding;
 import com.rogergcc.sharedpreferencefavorites.databinding.ItemLocationBinding;
-import com.rogergcc.sharedpreferencefavorites.helpers.BaseViewHolder;
-import com.rogergcc.sharedpreferencefavorites.helpers.MySharedPreference;
 import com.rogergcc.sharedpreferencefavorites.remote.model.LocationResponse;
+import com.rogergcc.sharedpreferencefavorites.ui.helpers.BaseViewHolder;
+import com.rogergcc.sharedpreferencefavorites.ui.helpers.MySharedPreference;
 
 import java.util.List;
 

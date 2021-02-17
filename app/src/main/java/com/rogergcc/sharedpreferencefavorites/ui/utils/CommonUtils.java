@@ -3,7 +3,7 @@
  * Copyright Ⓒ 2021 . All rights reserved.
  */
 
-package com.rogergcc.sharedpreferencefavorites.utils;
+package com.rogergcc.sharedpreferencefavorites.ui.utils;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
@@ -60,6 +60,9 @@ public final class CommonUtils {
             progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         }
         progressDialog.setContentView(R.layout.progress_dialog);
+//        progressDialog.setTitle(R.string.app_name);
+//        progressDialog.setMessage(context.getString(R.string.please_wait));
+
         progressDialog.setIndeterminate(true);
         progressDialog.setCancelable(false);
         progressDialog.setCanceledOnTouchOutside(false);

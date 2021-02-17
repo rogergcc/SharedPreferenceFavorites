@@ -3,7 +3,7 @@
  * Copyright Ⓒ 2021 . All rights reserved.
  */
 
-package com.rogergcc.sharedpreferencefavorites.favorites;
+package com.rogergcc.sharedpreferencefavorites.ui.favorites;
 
 import android.view.LayoutInflater;
 import android.view.View;

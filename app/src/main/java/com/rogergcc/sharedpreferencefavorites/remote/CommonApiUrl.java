@@ -21,7 +21,7 @@ public class CommonApiUrl {
     }
 
 
-    public static IGeoJsonServices getGeoJsonData() {
-        return RetrofitClient.getClienteGson(API_ENDPOINT).create(IGeoJsonServices.class);
+    public static IApiService getGeoJsonData() {
+        return RetrofitClient.getClienteGson(API_ENDPOINT).create(IApiService.class);
     }
 }

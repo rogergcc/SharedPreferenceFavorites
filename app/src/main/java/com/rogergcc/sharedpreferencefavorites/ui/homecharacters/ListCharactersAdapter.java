@@ -3,7 +3,7 @@
  * Copyright Ⓒ 2021 . All rights reserved.
  */
 
-package com.rogergcc.sharedpreferencefavorites.homecharacters;
+package com.rogergcc.sharedpreferencefavorites.ui.homecharacters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,9 +22,9 @@ import com.google.gson.GsonBuilder;
 import com.rogergcc.sharedpreferencefavorites.R;
 import com.rogergcc.sharedpreferencefavorites.databinding.ItemLoadingBinding;
 import com.rogergcc.sharedpreferencefavorites.databinding.ItemsCharacterBinding;
-import com.rogergcc.sharedpreferencefavorites.helpers.BaseViewHolder;
-import com.rogergcc.sharedpreferencefavorites.helpers.MySharedPreference;
 import com.rogergcc.sharedpreferencefavorites.model.RickMorty;
+import com.rogergcc.sharedpreferencefavorites.ui.helpers.BaseViewHolder;
+import com.rogergcc.sharedpreferencefavorites.ui.helpers.MySharedPreference;
 
 import java.util.List;
 

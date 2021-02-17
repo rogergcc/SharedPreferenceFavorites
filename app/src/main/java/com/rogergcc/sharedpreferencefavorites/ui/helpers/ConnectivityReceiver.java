@@ -1,4 +1,4 @@
-package com.rogergcc.sharedpreferencefavorites.helpers;
+package com.rogergcc.sharedpreferencefavorites.ui.helpers;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-import com.rogergcc.sharedpreferencefavorites.App;
+import com.rogergcc.sharedpreferencefavorites.ui.App;
 
 
 /**
