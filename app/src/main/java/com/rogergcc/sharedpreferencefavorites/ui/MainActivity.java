@@ -7,6 +7,7 @@ package com.rogergcc.sharedpreferencefavorites.ui;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -60,6 +61,11 @@ public class MainActivity extends AppCompatActivity {
 //        NavigationUI.setupWithNavController(toolbar, navController, appBarConfiguration);
     }
 
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+    }
 
     @Override
     public boolean onSupportNavigateUp() {
