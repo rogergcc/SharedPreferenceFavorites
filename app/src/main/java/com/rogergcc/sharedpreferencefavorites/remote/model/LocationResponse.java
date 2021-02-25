@@ -40,6 +40,9 @@ public class LocationResponse {
         private String url;
         @SerializedName("residents")
         private List<String> residents;
+
+        private List<String> residentsDisplayNames;
+
         @SerializedName("dimension")
         private String dimension;
         @SerializedName("type")
@@ -103,6 +106,28 @@ public class LocationResponse {
 
         public void setId(int id) {
             this.id = id;
+        }
+
+        public List<String> getResidentsDisplayNames() {
+            return residentsDisplayNames;
+        }
+
+        public void setResidentsDisplayNames(List<String> residentsDisplayNames) {
+            this.residentsDisplayNames = residentsDisplayNames;
+        }
+
+        @Override
+        public String toString() {
+            return "Location{" +
+                    "created='" + created + '\'' +
+                    ", url='" + url + '\'' +
+                    ", residents=" + residents +
+                    ", residentsDisplayNames=" + residentsDisplayNames +
+                    ", dimension='" + dimension + '\'' +
+                    ", type='" + type + '\'' +
+                    ", name='" + name + '\'' +
+                    ", id=" + id +
+                    '}';
         }
     }
 

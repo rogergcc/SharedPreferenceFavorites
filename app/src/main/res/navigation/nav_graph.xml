@@ -22,5 +22,20 @@
     <fragment
         android:id="@+id/nav_locations"
         android:name="com.rogergcc.sharedpreferencefavorites.ui.locations.LocationsFragment"
-        android:label="LocationsFragment" />
+        tools:layout="@layout/fragment_locations"
+        android:label="@string/menu_locations" >
+        <action
+            android:id="@+id/action_nav_locations_to_charactersDialogFragment"
+            app:destination="@id/charactersDialogFragment" />
+    </fragment>
+    <dialog
+
+        android:id="@+id/charactersDialogFragment"
+        tools:layout="@layout/dialog_fragment_characters"
+        android:name="com.rogergcc.sharedpreferencefavorites.ui.locations.CharactersDialogFragment"
+        android:label="CharactersDialogFragment" >
+        <argument
+            android:name="personajesArg"
+            app:argType="string" />
+    </dialog>
 </navigation>

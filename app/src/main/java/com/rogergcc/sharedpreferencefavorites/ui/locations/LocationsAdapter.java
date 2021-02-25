@@ -29,11 +29,12 @@ public class LocationsAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     private List<LocationResponse.Location> mFavoritesList;
     private boolean isLoaderVisible = false;
 
+    private ILocationListener iLocationListener;
 
-    public LocationsAdapter( List<LocationResponse.Location> items) {
+    public LocationsAdapter( List<LocationResponse.Location> items,ILocationListener iLocationListener) {
 
         this.mValues = items;
-
+        this.iLocationListener= iLocationListener;
     }
 
     public static boolean checkAvailability(List<LocationResponse.Location> rickMortyList, LocationResponse.Location rickMorty) {
@@ -159,7 +160,12 @@ public class LocationsAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             binding.tvDimensionLocation.setText(mValues.get(position).getDimension());
             binding.tvTypeLocation.setText(mValues.get(position).getType());
 
-
+            binding.itemCardViewCharacter.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    iLocationListener.ondLocationClick(mValues.get(position));
+                }
+            });
         }
 
         @Override

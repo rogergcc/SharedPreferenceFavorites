@@ -12,14 +12,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.rogergcc.sharedpreferencefavorites.R;
 import com.rogergcc.sharedpreferencefavorites.model.RickMorty;
+import com.rogergcc.sharedpreferencefavorites.ui.helpers.MySharedPreference;
 
 import java.util.List;
 
@@ -27,10 +32,13 @@ import java.util.List;
 public class FavoritesCharactersAdapter extends RecyclerView.Adapter<FavoritesCharactersAdapter.ViewHolder> {
 
     private final List<RickMorty> mValues;
+    private MySharedPreference sharedPreference;
+
+    private List<RickMorty> mFavoritesList;
 
     public FavoritesCharactersAdapter(List<RickMorty> items) {
         mValues = items;
-
+        this.mFavoritesList = items;
     }
 
     @NonNull
@@ -39,6 +47,18 @@ public class FavoritesCharactersAdapter extends RecyclerView.Adapter<FavoritesCh
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_favorite_character, parent, false);
         return new ViewHolder(view);
+    }
+
+    @Override
+    public int getItemCount() {
+//        return mValues.size();
+        return mValues == null ? 0 : mValues.size();
+    }
+
+    @Override
+    public long getItemId(int position) {
+        RickMorty rickMorty = mValues.get(position);
+        return rickMorty.getId();
     }
 
     @Override
@@ -68,22 +88,37 @@ public class FavoritesCharactersAdapter extends RecyclerView.Adapter<FavoritesCh
                 .apply(requestOptions)
                 .into(holder.mimage_character);
 
+        holder.mselect_favorite.setColorFilter(ContextCompat.getColor(holder.itemView.getContext(),
+                R.color.color_select_favorite));
 
-        holder.mView.setOnClickListener(new View.OnClickListener() {
+
+        holder.mselect_favorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                GsonBuilder builder = new GsonBuilder();
+
+                Gson gson = builder.create();
+
+                sharedPreference = new MySharedPreference(holder.itemView.getContext());
+
+                mFavoritesList.remove(mValues.get(position));
+
+                String addNewItem = gson.toJson(mFavoritesList);
+
+                sharedPreference.saveFavoritesMarkers(addNewItem);
+                notifyItemRemoved(position);
 
             }
         });
     }
 
-    @Override
-    public int getItemCount() {
-        return mValues.size();
-    }
+
+
+
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
+        public final CardView itemCardViewCharacter;
         public final TextView mname_character;
 
         private final TextView mdetails_status;
@@ -94,10 +129,11 @@ public class FavoritesCharactersAdapter extends RecyclerView.Adapter<FavoritesCh
         private final ImageView mimage_character;
         private final ImageView mselect_favorite;
         public RickMorty mItem;
-
         public ViewHolder(View view) {
             super(view);
             mView = view;
+            itemCardViewCharacter = view.findViewById(R.id.itemCardViewCharacter);
+
             mimage_character = view.findViewById(R.id.image_character);
             mselect_favorite = view.findViewById(R.id.select_favorite);
 

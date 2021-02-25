@@ -12,7 +12,6 @@ import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -53,7 +52,7 @@ public class RickAndMortyFragment extends Fragment {
     private ProgressDialog mProgressDialog;
     private HomeCharactersViewModel viewModel;
     private Parcelable mystatee;
-
+    private List<String> charactersFromLocationList;
 //    private HomeCharactersViewModel viewModel= new ViewModelProvider(this).get(HomeCharactersViewModel.class);
 
     public RickAndMortyFragment() {
@@ -67,12 +66,12 @@ public class RickAndMortyFragment extends Fragment {
 
     public void showLoading() {
         //hideLoading();
-        mProgressDialog = CommonUtils.showLoadingDialog(mcontext);
+        mProgressDialog = CommonUtils.showLoadingDialogMessage(mcontext);
     }
 
     public void toggleLoadingList() {
         if (mProgressDialog == null) {
-            mProgressDialog = CommonUtils.showLoadingDialog(mcontext);
+            mProgressDialog = CommonUtils.showLoadingDialogMessage(mcontext);
         } else {
             if (mProgressDialog.isShowing()) {
                 mProgressDialog.dismiss();
@@ -83,33 +82,22 @@ public class RickAndMortyFragment extends Fragment {
     }
 
 
-//    @Override
-//    public void onDestroyView() {
-//        super.onDestroyView();
-////        val state = recyclerview.layoumanager.on SaveInatanceSate()
-//
-////        mystatee= binding.list.getLayoutManager().onSaveInstanceState();
-//        mystatee= linearLayoutManager.onSaveInstanceState();
-//        state.putParcelable(LIST_STATE_KEY, mListState);
-//    }
 
     @Override
     public void onPause() {
+//        binding.list.setAdapter(null);
+//        adapterapi.clear();
         super.onPause();
-        AppLogger.e("Fragment Resume");
-//        mystatee= binding.list.getLayoutManager().onSaveInstanceState();
-        mystatee = linearLayoutManager.onSaveInstanceState();
+        AppLogger.e("RickAndMortyFragment Fragment Pause");
+//        mystatee = linearLayoutManager.onSaveInstanceState();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-//        if (mystatee != null) {
-//            linearLayoutManager.onRestoreInstanceState(mystatee);
-//        }
-        AppLogger.e("Fragment Resume");
-//        binding.list.getLayoutManager().onRestoreInstanceState(mystatee);
-        linearLayoutManager.onRestoreInstanceState(mystatee);
+
+        AppLogger.e("RickAndMortyFragment Fragment Resume");
+//        linearLayoutManager.onRestoreInstanceState(mystatee);
     }
 
 
@@ -131,7 +119,23 @@ public class RickAndMortyFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         AppLogger.e("RickAndMortyFragment" + "=>onCreate");
+        viewModel = new ViewModelProvider(this).get(HomeCharactersViewModel.class);
 
+//        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+//            @Override
+//            public void handleOnBackPressed() {
+//                // Handle the back button event
+//                adapterapi.setCharacters(null);
+//            }
+//        };
+//        requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        observeListCharactersViewMode();
 
     }
 
@@ -143,8 +147,8 @@ public class RickAndMortyFragment extends Fragment {
         //binding = FragmentRickandmortyListBinding.inflate(getLayoutInflater());
         mcontext = this.getActivity();
 
-
-        init();
+//        observeListCharactersViewMode();
+//        init();
     }
 
     public void init() {
@@ -155,11 +159,12 @@ public class RickAndMortyFragment extends Fragment {
         rickMortyCharactersList = new ArrayList<>();
 
         loadFavoritesData();
-
-        adapterapi = new ListCharactersAdapter(mFavoritesList, rickMortyCharactersList);
+//        observeListCharactersViewMode();
+        adapterapi = new ListCharactersAdapter(mFavoritesList);
         binding.list.setAdapter(adapterapi);
 
-        currentPage = PAGE_START;
+
+
 
         binding.list.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
@@ -173,11 +178,19 @@ public class RickAndMortyFragment extends Fragment {
 //                        getCharacters();
 //                        getMyListCharactersViewModel();
                         viewModel.apiCallCharacters(currentPage);
+//                        observeListCharactersViewMode();
                     }
                 }
             }
         });
-        observeListCharactersViewMode();
+
+    }
+
+    @Override
+    public void onDestroyView() {
+        binding=null;
+
+        super.onDestroyView();
     }
 
     @Override
@@ -188,15 +201,17 @@ public class RickAndMortyFragment extends Fragment {
         binding = FragmentRickandmortyListBinding.inflate(getLayoutInflater());
         mcontext = this.getActivity();
         AppLogger.e("RickAndMortyFragment" + "=>oncreateView");
-        AppLogger.e("RickAndMortyFragment" + "Page=>" + currentPage);
+        currentPage = PAGE_START;
+        AppLogger.e("RickAndMortyFragment" + "=>oncreateView NumberPage=>" + currentPage);
         View view = binding.getRoot();
 
-//        init();
+        init();
         return view;
     }
 
     private void observeListCharactersViewMode() {
-        viewModel = new ViewModelProvider(this).get(HomeCharactersViewModel.class);
+
+        rickMortyCharactersList.clear();
 
         if (currentPage == 1)
             showLoading();
@@ -204,7 +219,7 @@ public class RickAndMortyFragment extends Fragment {
             showProgressLoadingMore();
 
         viewModel.getRMCharactersListObserver().observe(getViewLifecycleOwner(), rickMortyResponse -> {
-            Toast.makeText(mcontext, "get Characters", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(mcontext, "get Characters", Toast.LENGTH_SHORT).show();
 
             if (currentPage == 1)
                 hideLoading();
@@ -217,7 +232,9 @@ public class RickAndMortyFragment extends Fragment {
             totalPage = rickMortyResponse.getInfo().getPages();
             int oldCount = rickMortyCharactersList.size();
             rickMortyCharactersList.addAll(rickMortyResponse.getResults());
+            adapterapi.setCharacters(rickMortyCharactersList);
             adapterapi.notifyItemRangeInserted(oldCount, rickMortyCharactersList.size());
+//            adapterapi.notifyDataSetChanged();
 
 
         });

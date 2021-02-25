@@ -95,7 +95,7 @@
                 android:clickable="true"
                 android:contentDescription="@string/app_name"
                 android:focusable="true"
-                android:padding="5dp"
+                android:padding="3dp"
 
                 android:src="@drawable/ic_star_black_24dp" />
 

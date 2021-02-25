@@ -14,11 +14,17 @@ import android.graphics.drawable.ColorDrawable;
 import android.provider.Settings;
 import android.util.Patterns;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.rogergcc.sharedpreferencefavorites.R;
+import com.rogergcc.sharedpreferencefavorites.model.RickMorty;
+import com.rogergcc.sharedpreferencefavorites.ui.helpers.MySharedPreference;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
@@ -53,7 +59,7 @@ public final class CommonUtils {
         return new String(buffer, "UTF-8");
     }
 
-    public static ProgressDialog showLoadingDialog(Context context) {
+    public static ProgressDialog showLoadingDialogMessage(Context context) {
         ProgressDialog progressDialog = new ProgressDialog(context);
         progressDialog.show();
         if (progressDialog.getWindow() != null) {
@@ -67,5 +73,37 @@ public final class CommonUtils {
         progressDialog.setCancelable(false);
         progressDialog.setCanceledOnTouchOutside(false);
         return progressDialog;
+    }
+
+    public static ProgressDialog showLoadingDialogMessage(Context context, String message) {
+        ProgressDialog progressDialog = new ProgressDialog(context);
+        progressDialog.setContentView(R.layout.progress_dialog);
+        progressDialog.setTitle(message);
+        progressDialog.setMessage(context.getString(R.string.please_wait));
+
+        progressDialog.show();
+//        if (progressDialog.getWindow() != null) {
+//            progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//        }
+
+
+        progressDialog.setIndeterminate(true);
+        progressDialog.setCancelable(false);
+        progressDialog.setCanceledOnTouchOutside(false);
+        return progressDialog;
+    }
+
+    public static ArrayList<RickMorty> getMyFavoriteList(Context mcontext) {
+        ArrayList<RickMorty> mFavoritesList;
+        MySharedPreference sharedPreference = new MySharedPreference(mcontext);
+        String productsFromCart = sharedPreference.retrieveFavorites();
+        Type type = new TypeToken<ArrayList<RickMorty>>() {
+        }.getType();
+
+        mFavoritesList = new Gson().fromJson(productsFromCart, type);
+        if (mFavoritesList == null) {
+            mFavoritesList = new ArrayList<>();
+        }
+        return mFavoritesList;
     }
 }

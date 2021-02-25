@@ -38,10 +38,14 @@ public class ListCharactersAdapter extends RecyclerView.Adapter<BaseViewHolder> 
     private boolean isLoaderVisible = false;
 
 
-    public ListCharactersAdapter(List<RickMorty> mFavorites, List<RickMorty> items) {
-        this.mFavoritesList = mFavorites;
-        this.mValues = items;
+//    public ListCharactersAdapter(List<RickMorty> mFavorites, List<RickMorty> items) {
+//        this.mFavoritesList = mFavorites;
+//        this.mValues = items;
+//    }
 
+    public ListCharactersAdapter(List<RickMorty> mFavorites) {
+        this.mFavoritesList = mFavorites;
+//        this.mValues = items;
     }
 
     public static boolean checkAvailability(List<RickMorty> rickMortyList, RickMorty rickMorty) {
@@ -52,6 +56,10 @@ public class ListCharactersAdapter extends RecyclerView.Adapter<BaseViewHolder> 
         }
 
         return false;
+    }
+
+    public void setCharacters(List<RickMorty> documentModelList) {
+        this.mValues = documentModelList;
     }
 
     @NonNull
@@ -100,20 +108,21 @@ public class ListCharactersAdapter extends RecyclerView.Adapter<BaseViewHolder> 
         return mValues == null ? 0 : mValues.size();
     }
 
-//    @Override
-//    public long getItemId(int position) {
-//        RickMorty rickMorty = mValues.get(position);
-//        return rickMorty.getId();
-//    }
+    @Override
+    public long getItemId(int position) {
+        RickMorty rickMorty = mValues.get(position);
+        return rickMorty.getId();
+    }
 
     @Override
     public int getItemViewType(int position) {
 //        return position;
-        if (isLoaderVisible) {
-            return position == mValues.size() - 1 ? VIEW_TYPE_LOADING : VIEW_TYPE_NORMAL;
-        } else {
-            return VIEW_TYPE_NORMAL;
-        }
+//        if (isLoaderVisible) {
+//            return position == mValues.size() - 1 ? VIEW_TYPE_LOADING : VIEW_TYPE_NORMAL;
+//        } else {
+//            return VIEW_TYPE_NORMAL;
+//        }
+        return super.getItemViewType(position);
     }
 
     //region METHOD FOR ADDING MORE ITEMS IN SCROLL
@@ -148,6 +157,29 @@ public class ListCharactersAdapter extends RecyclerView.Adapter<BaseViewHolder> 
     }
     //endregion
 
+    public static class ProgressHolder extends BaseViewHolder {
+        ItemLoadingBinding itemLoadingBinding;
+
+        public ProgressHolder(@NonNull View itemView) {
+            super(itemView);
+        }
+
+        public ProgressHolder(@NonNull ItemLoadingBinding binding) {
+            super(binding.getRoot());
+            this.itemLoadingBinding = binding;
+            //this.itemRecyclerMealBinding.
+        }
+
+        @Override
+        public void bindViews(int position) {
+            super.bindViews(position);
+        }
+
+        @Override
+        public void clear() {
+
+        }
+    }
 
     public class ViewHolder extends BaseViewHolder {
         ItemsCharacterBinding binding;
@@ -172,9 +204,7 @@ public class ListCharactersAdapter extends RecyclerView.Adapter<BaseViewHolder> 
             RickMorty playerPosition = mValues.get(position);
 
 
-
-
-        binding.nameCharacter.setText(mValues.get(position).getName());
+            binding.nameCharacter.setText(mValues.get(position).getName());
             binding.detailsStatus.setText(mValues.get(position).getStatus());
             binding.detailsSpecies.setText(mValues.get(position).getSpecies());
             binding.detailsGender.setText(mValues.get(position).getGender());
@@ -182,93 +212,69 @@ public class ListCharactersAdapter extends RecyclerView.Adapter<BaseViewHolder> 
             binding.detailsLastLocation.setText(mValues.get(position).getLocation().getName());
 
 
-        RequestOptions requestOptions = new RequestOptions()
-                .fitCenter()
-                .placeholder(R.drawable.imagesloading)
-                .centerInside()
+            RequestOptions requestOptions = new RequestOptions()
+                    .fitCenter()
+                    .placeholder(R.drawable.imagesloading)
+                    .centerInside()
 //                .error(R.drawable.cinema_filled_error)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .priority(Priority.HIGH)
-                .dontAnimate()
-                .dontTransform();
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .priority(Priority.HIGH)
+                    .dontAnimate()
+                    .dontTransform();
 
-        Glide.with(itemView.getContext())
-                .load(mValues.get(position).getImage())
-                .apply(requestOptions)
-                .into(binding.imageCharacter);
+            Glide.with(itemView.getContext())
+                    .load(mValues.get(position).getImage())
+                    .apply(requestOptions)
+                    .into(binding.imageCharacter);
 
-        if (mFavoritesList.size() != 0) {
-            boolean itemExists = checkAvailability(mFavoritesList, mValues.get(position));
+            if (mFavoritesList.size() != 0) {
+                boolean itemExists = checkAvailability(mFavoritesList, mValues.get(position));
 
-            if (itemExists) {
-                binding.selectFavorite.setColorFilter(ContextCompat.getColor(itemView.getContext(),
-                        R.color.color_select_favorite));
-
-                binding.itemCardViewCharacter.setCardBackgroundColor( ContextCompat.getColor(itemView.getContext(), R.color.colorPrimaryDark));
-
-            } else {
-                binding.itemCardViewCharacter.setCardBackgroundColor( ContextCompat.getColor(itemView.getContext(), R.color.color_details));
-                binding.selectFavorite.clearColorFilter();
-            }
-        }
-
-
-        binding.selectFavorite.setOnClickListener(new View.OnClickListener() {
-            int button01pos = 0;
-
-            @Override
-            public void onClick(View v) {
-                GsonBuilder builder = new GsonBuilder();
-
-                Gson gson = builder.create();
-
-                sharedPreference = new MySharedPreference(itemView.getContext());
-                if (binding.selectFavorite.getColorFilter() != null) {
-                    binding.itemCardViewCharacter.setCardBackgroundColor( ContextCompat.getColor(itemView.getContext(), R.color.color_details));
-                    binding.selectFavorite.clearColorFilter();
-                    mFavoritesList.remove(mValues.get(position));
-
-                    String addNewItem = gson.toJson(mFavoritesList);
-
-                    sharedPreference.saveFavoritesMarkers(addNewItem);
-                } else {
-                    binding.itemCardViewCharacter.setCardBackgroundColor( ContextCompat.getColor(itemView.getContext(), R.color.colorPrimaryDark));
+                if (itemExists) {
                     binding.selectFavorite.setColorFilter(ContextCompat.getColor(itemView.getContext(),
                             R.color.color_select_favorite));
-                    mFavoritesList.add(mValues.get(position));
 
-                    String addNewItem = gson.toJson(mFavoritesList);
-                    sharedPreference.saveFavoritesMarkers(addNewItem);
+                    binding.itemCardViewCharacter.setCardBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.colorPrimaryDark));
+
+                } else {
+                    binding.itemCardViewCharacter.setCardBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.color_details));
+                    binding.selectFavorite.clearColorFilter();
+                }
+            }
+
+
+            binding.selectFavorite.setOnClickListener(new View.OnClickListener() {
+                int button01pos = 0;
+
+                @Override
+                public void onClick(View v) {
+                    GsonBuilder builder = new GsonBuilder();
+
+                    Gson gson = builder.create();
+
+                    sharedPreference = new MySharedPreference(itemView.getContext());
+                    if (binding.selectFavorite.getColorFilter() != null) {
+                        binding.itemCardViewCharacter.setCardBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.color_details));
+                        binding.selectFavorite.clearColorFilter();
+                        mFavoritesList.remove(mValues.get(position));
+
+                        String addNewItem = gson.toJson(mFavoritesList);
+
+                        sharedPreference.saveFavoritesMarkers(addNewItem);
+                    } else {
+                        binding.itemCardViewCharacter.setCardBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.colorPrimaryDark));
+                        binding.selectFavorite.setColorFilter(ContextCompat.getColor(itemView.getContext(),
+                                R.color.color_select_favorite));
+                        mFavoritesList.add(mValues.get(position));
+
+                        String addNewItem = gson.toJson(mFavoritesList);
+                        sharedPreference.saveFavoritesMarkers(addNewItem);
+
+                    }
+
 
                 }
-
-
-            }
-        });
-        }
-
-        @Override
-        public void clear() {
-
-        }
-    }
-
-    public static class ProgressHolder extends BaseViewHolder {
-        ItemLoadingBinding itemLoadingBinding;
-
-        public ProgressHolder(@NonNull View itemView) {
-            super(itemView);
-        }
-
-        public ProgressHolder(@NonNull ItemLoadingBinding binding) {
-            super(binding.getRoot());
-            this.itemLoadingBinding = binding;
-            //this.itemRecyclerMealBinding.
-        }
-
-        @Override
-        public void bindViews(int position) {
-            super.bindViews(position);
+            });
         }
 
         @Override

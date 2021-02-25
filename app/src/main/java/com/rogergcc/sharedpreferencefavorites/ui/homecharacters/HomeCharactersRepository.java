@@ -18,14 +18,14 @@ import retrofit2.Callback;
 
 public class HomeCharactersRepository {
     private IApiService apiService;
-
+    MutableLiveData<RickMortyResponse> data = new MutableLiveData<>();
     public HomeCharactersRepository() {
         apiService = CommonApiUrl.getGeoJsonData();
 
     }
 
     public LiveData<RickMortyResponse> getCharactersRepo(int page) {
-        MutableLiveData<RickMortyResponse> data = new MutableLiveData<>();
+
 
         apiService.getCharacters(page).enqueue(new Callback<RickMortyResponse>() {
             @Override
@@ -38,6 +38,8 @@ public class HomeCharactersRepository {
                 data.setValue(null);
             }
         });
+
+
         return data;
     }
 

@@ -11,45 +11,52 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.rogergcc.sharedpreferencefavorites.R;
 import com.rogergcc.sharedpreferencefavorites.databinding.FragmentLocationsBinding;
+import com.rogergcc.sharedpreferencefavorites.model.RickMorty;
 import com.rogergcc.sharedpreferencefavorites.remote.CommonApiUrl;
 import com.rogergcc.sharedpreferencefavorites.remote.model.LocationResponse;
+import com.rogergcc.sharedpreferencefavorites.ui.homecharacters.HomeCharactersViewModel;
 import com.rogergcc.sharedpreferencefavorites.ui.utils.AppLogger;
 import com.rogergcc.sharedpreferencefavorites.ui.utils.CommonUtils;
+import com.rogergcc.sharedpreferencefavorites.ui.utils.ListUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
+import retrofit2.Response;
 
 import static com.rogergcc.sharedpreferencefavorites.ui.helpers.PaginationListener.PAGE_START;
 
 
-public class LocationsFragment extends Fragment {
+public class LocationsFragment extends Fragment implements ILocationListener {
 
 
     FragmentLocationsBinding binding;
+    List<String> personajes = new ArrayList<>();
     private Context mcontext;
-
     private LinearLayoutManager linearLayoutManager;
-
-
     private List<LocationResponse.Location> rickMortyCharactersList;
     private ProgressDialog pd;
     private LocationsAdapter adapterapi;
     private int currentPage;
-
     private ProgressDialog mProgressDialog;
     private int totalPage = 2;
+    private HomeCharactersViewModel viewModel;
+    private NavController navController;
 
     public LocationsFragment() {
         // Required empty public constructor
@@ -80,7 +87,7 @@ public class LocationsFragment extends Fragment {
         rickMortyCharactersList = new ArrayList<>();
 
 
-        adapterapi = new LocationsAdapter(rickMortyCharactersList);
+        adapterapi = new LocationsAdapter(rickMortyCharactersList, this);
         binding.list.setAdapter(adapterapi);
 
         currentPage = PAGE_START;
@@ -99,12 +106,11 @@ public class LocationsFragment extends Fragment {
 
     public void showLoading() {
         //hideLoading();
-        mProgressDialog = CommonUtils.showLoadingDialog(mcontext);
+        mProgressDialog = CommonUtils.showLoadingDialogMessage(mcontext,"loading Characters");
     }
 
     public void getLocationsCharacters() {
         showLoading();
-
         //region REGION SEND POST RETROFIT
         Call<LocationResponse> call = CommonApiUrl.getGeoJsonData().getLocations(currentPage);
         call.enqueue(new Callback<LocationResponse>() {
@@ -145,5 +151,92 @@ public class LocationsFragment extends Fragment {
 
 
     }
+
+    @Override
+    public void onDashboardCourseClick(LocationResponse locationResponse, ImageView imageView) {
+
+    }
+
+    @Override
+    public void ondLocationClick(LocationResponse.Location locationResponse) {
+//        Toast.makeText(mcontext, locationResponse.getResidents().toString(), Toast.LENGTH_SHORT).show();
+
+        List<String> personajesDetail = new ArrayList<>();
+        showLoading();
+        String lastValue= ListUtils.getLast(locationResponse.getResidents());
+        for (String resident : locationResponse.getResidents()) {
+            int p = resident.lastIndexOf("/");
+            String codigo = resident.substring(p + 1);
+
+            CommonApiUrl.getGeoJsonData().getCharacterDetails(Integer.parseInt(codigo)).enqueue(new Callback<RickMorty>() {
+                @Override
+                public void onResponse(Call<RickMorty> call, Response<RickMorty> response) {
+                    if (!response.isSuccessful()){
+                        hideLoading();
+                        return;
+                    }
+                    if (response.body()==null){
+                        hideLoading();
+                        return;
+                    }
+
+                    personajesDetail.add(response.body().getName());
+
+                    if (resident.equals(lastValue)){
+                        hideLoading();
+                        //Toast.makeText(mcontext, personajesDetail.toString(), Toast.LENGTH_SHORT).show();
+
+                        showDialogFragment(locationResponse.getName(),personajesDetail.toString(),1);
+                    }
+
+                    //Toast.makeText(mcontext, personajesDetail.toString(), Toast.LENGTH_SHORT).show();
+                }
+                @Override
+                public void onFailure(Call<RickMorty> call, Throwable t) {
+                    hideLoading();
+                    AppLogger.e("Error: " + t.getMessage());
+
+                }
+            });
+//                viewModel.apiCallDetailsCharacter(codigo);
+
+        }
+        personajes.clear();
+
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        navController = Navigation.findNavController(view);
+    }
+
+    private void showDialogFragment(String titulo, String mensaje, int tipoDialog){
+
+//        ListFragmentDirections.ActionListFragmentToDetailsFragment action = ListFragmentDirections.actionListFragmentToDetailsFragment();
+//        action.setPosition(position);
+//        navController.navigate(action);
+        Bundle bundle = new Bundle();
+        bundle.putString("titulo", titulo);
+        bundle.putString("personajesArg", mensaje);
+        navController.navigate(R.id.action_nav_locations_to_charactersDialogFragment, bundle);
+
+
+    }
+
+//    private void observeListCharactersViewMode() {
+//        viewModel = new ViewModelProvider(this).get(HomeCharactersViewModel.class);
+//        showLoading();
+//        List<String> mpersonajes = new ArrayList<>();
+//        viewModel.getDetailsListOserver().observe(getViewLifecycleOwner(), rickMortyResponse -> {
+//
+//            hideLoading();
+//            if (rickMortyResponse == null) return;
+//            mpersonajes.add(rickMortyResponse.getName());
+//        });
+//
+//        Toast.makeText(mcontext, mpersonajes.toString(), Toast.LENGTH_SHORT).show();
+////        mpersonajes.clear();
+//    }
 
 }

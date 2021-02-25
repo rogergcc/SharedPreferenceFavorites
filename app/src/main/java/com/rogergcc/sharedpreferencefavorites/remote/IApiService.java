@@ -1,12 +1,14 @@
 package com.rogergcc.sharedpreferencefavorites.remote;
 
 
+import com.rogergcc.sharedpreferencefavorites.model.RickMorty;
 import com.rogergcc.sharedpreferencefavorites.model.RickMortyResponse;
 import com.rogergcc.sharedpreferencefavorites.remote.model.LocationResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface IApiService {
@@ -28,6 +30,10 @@ public interface IApiService {
     @Headers("Content-Type: application/json")
     @GET("location")
     Call<LocationResponse> getLocations(@Query("page") int page);
+
+    @Headers("Content-Type: application/json")
+    @GET("character/{number}")
+    Call<RickMorty> getCharacterDetails(@Path("number") int number);
 
     //region REGION FIELD URL encode METHOD
 //    @FormUrlEncoded

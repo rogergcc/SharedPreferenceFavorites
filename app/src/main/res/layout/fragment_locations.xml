@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ Created by rogergcc
   ~ Copyright Ⓒ 2021 . All rights reserved.
@@ -9,7 +10,7 @@
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:animateLayoutChanges="true"
+
     android:background="@color/color_details"
 
     >
@@ -24,10 +25,7 @@
         android:background="@color/color_details"
         android:clipToPadding="false"
         android:orientation="vertical"
-        android:paddingStart="4sp"
-        android:paddingTop="4sp"
-        android:paddingEnd="4sp"
-        android:paddingBottom="45sp"
+
 
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
 
