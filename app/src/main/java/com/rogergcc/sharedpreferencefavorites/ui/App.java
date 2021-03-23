@@ -23,6 +23,7 @@ public class App extends Application {
         resources = getResources();
         //SharedPrefsManager.initialize(this);
         AppLogger.init();
+//        HwAds.init(this);
     }
 
     public static synchronized App getInstance() {

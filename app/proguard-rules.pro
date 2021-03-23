@@ -19,3 +19,28 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+-ignorewarnings
+-keepattributes *Annotation*
+-keepattributes Exceptions
+-keepattributes InnerClasses
+-keepattributes Signature
+-keepattributes SourceFile,LineNumberTable
+-keep class com.huawei.openalliance.ad.** { *; }
+-keep class com.huawei.hms.ads.** { *; }
+
+#-keepclassmembers,allowobfuscation class * {
+#  @com.google.gson.annotations.SerializedName <fields>;
+#}
+#-keep class com.hianalytics.android.**{*;}
+#-keep class com.huawei.updatesdk.**{*;}
+#-keep class com.huawei.hms.**{*;}
+#-keep class com.huawei.gamebox.plugin.gameservice.**{*;}
+#
+#-keep interface com.huawei.hms.analytics.type.HAEventType{*;}
+#-keep interface com.huawei.hms.analytics.type.HAParamType{*;}
+#-keep class com.huawei.hms.analytics.HiAnalyticsTools{
+#        public static void enableLog();
+#        public static void enableLog(int);
+#}
+#-keep class com.huawei.hms.analytics.HiAnalyticsInstance{*;}
+#-keep class com.huawei.hms.analytics.HiAnalytics{*;}

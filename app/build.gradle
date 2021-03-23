@@ -7,7 +7,7 @@ import groovy.json.JsonSlurper
 
 apply plugin: 'com.android.application'
 apply plugin: "androidx.navigation.safeargs"
-
+apply plugin: 'com.huawei.agconnect'
 def localProperties = new Properties()
 localProperties.load(new FileInputStream(rootProject.file("local.properties")))
 
@@ -31,18 +31,20 @@ android {
         applicationId "com.rogergcc.sharedpreferencefavorites"
         minSdkVersion 19
         targetSdkVersion 30
-        versionCode 4
-        versionName "2.1"
+        versionCode 5
+        versionName "3.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
     buildTypes {
         debug {
             versionNameSuffix "-DEBUG"
-            applicationIdSuffix ".debug"
+//            applicationIdSuffix ".debug"
             debuggable true
 
             buildConfigField "String", "POST_URL", postsUrl
             //resValue("string", "google_maps_key", localProperties['apiKey'])
+            resValue("string", "splashAdId", localProperties['splashAdId'])
             // use in app R.string.google_maps_key
             //getResources().getString(R.string.google_maps_key);
         }
@@ -53,6 +55,7 @@ android {
 
             buildConfigField "String", "POST_URL", postsUrl
             //resValue("string", "google_maps_key", localProperties['apiKey'])
+            resValue("string", "splashAdId", localProperties['splashAdIdRelease'])
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -113,4 +116,17 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
 //    annotationProcessor "android.arch.lifecycle:compiler:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+
+//    implementation 'com.huawei.agconnect:agconnect-core:1.3.1.300'
+    implementation 'com.huawei.agconnect:agconnect-core:1.4.0.300'
+
+    //Ads Kit
+    implementation 'com.huawei.hms:ads-lite:13.4.37.300'
+    implementation 'com.huawei.hms:ads-consent:3.4.30.307'
+
+
+//    implementation 'com.huawei.hms:ads-lite:13.4.32.300'
+
+//    implementation 'com.huawei.hms:base:4.0.4.301'
+
 }
